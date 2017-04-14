@@ -30,7 +30,7 @@
         {
             this.title = new System.Windows.Forms.Label();
             this.Invitecode = new System.Windows.Forms.TextBox();
-            this.login = new System.Windows.Forms.Button();
+            this.Login = new System.Windows.Forms.Button();
             this.reset = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -54,15 +54,15 @@
             this.Invitecode.Size = new System.Drawing.Size(304, 62);
             this.Invitecode.TabIndex = 1;
             // 
-            // login
+            // Login
             // 
-            this.login.Location = new System.Drawing.Point(204, 302);
-            this.login.Name = "login";
-            this.login.Size = new System.Drawing.Size(121, 46);
-            this.login.TabIndex = 2;
-            this.login.Text = "登录";
-            this.login.UseVisualStyleBackColor = true;
-            this.login.Click += new System.EventHandler(this.login_Click);
+            this.Login.Location = new System.Drawing.Point(204, 302);
+            this.Login.Name = "Login";
+            this.Login.Size = new System.Drawing.Size(121, 46);
+            this.Login.TabIndex = 2;
+            this.Login.Text = "登录";
+            this.Login.UseVisualStyleBackColor = true;
+            this.Login.Click += new System.EventHandler(this.Login_Click);
             // 
             // reset
             // 
@@ -80,7 +80,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(729, 449);
             this.Controls.Add(this.reset);
-            this.Controls.Add(this.login);
+            this.Controls.Add(this.Login);
             this.Controls.Add(this.Invitecode);
             this.Controls.Add(this.title);
             this.Name = "LoginForm";
@@ -95,7 +95,7 @@
 
         private System.Windows.Forms.Label title;
         private System.Windows.Forms.TextBox Invitecode;
-        private System.Windows.Forms.Button login;
+        private System.Windows.Forms.Button Login;
         private System.Windows.Forms.Button reset;
     }
 }
