@@ -1,0 +1,9 @@
+C:\Users\Sen\Desktop\GraDes\GraDes\bin\Debug\test.exe.config
+C:\Users\Sen\Desktop\GraDes\GraDes\bin\Debug\test.exe
+C:\Users\Sen\Desktop\GraDes\GraDes\bin\Debug\test.pdb
+C:\Users\Sen\Desktop\GraDes\GraDes\obj\Debug\GraDes.csprojResolveAssemblyReference.cache
+C:\Users\Sen\Desktop\GraDes\GraDes\obj\Debug\test.LoginForm.resources
+C:\Users\Sen\Desktop\GraDes\GraDes\obj\Debug\test.Properties.Resources.resources
+C:\Users\Sen\Desktop\GraDes\GraDes\obj\Debug\GraDes.csproj.GenerateResource.Cache
+C:\Users\Sen\Desktop\GraDes\GraDes\obj\Debug\test.exe
+C:\Users\Sen\Desktop\GraDes\GraDes\obj\Debug\test.pdb
