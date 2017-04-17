@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,10 +13,22 @@ namespace test
 {
     public partial class LoginForm : Form
     {
-
+        SqlConnector sql = new SqlConnector();
         public LoginForm()
         {
             InitializeComponent();
+        }
+
+        private void Invitecode_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //判断是否输入数字
+            if (e.KeyChar != '\b')//这是允许输入退格键  
+            {
+                if ((e.KeyChar < '0') || (e.KeyChar > '9'))//这是允许输入0-9数字  
+                {
+                    e.Handled = true;
+                }
+            }
         }
 
         private void Reset_Click(object sender, EventArgs e)
@@ -25,32 +38,37 @@ namespace test
 
         private void Login_Click(object sender, EventArgs e)
         {
-            //判断是否输入数字
-            try
+            if (Invitecode.Text.Length == 6)
             {
                 //某些操作
                 int invcode = int.Parse(Invitecode.Text);
-                //判断长度是否为6
-                if (Invitecode.Text.Length == 6)
+
+                //数据库字符串拼接
+                SqlConnector.ConnStr = "Data Source = SENFOND;Initial Catalog = gra_des;Trusted_Connection=true;";
+                if (sql.Link())
                 {
-                    VoteWindow vote = new VoteWindow();
-                    this.Hide();
-                    vote.ShowDialog();
-                    Application.ExitThread();
+                    if (sql.Checkcode(invcode))
+                    {
+                        VoteWindow vote = new VoteWindow();
+                        this.Hide();
+                        vote.ShowDialog();
+                        Application.ExitThread();
+                    }
+                    else
+                    {
+                        MessageBox.Show("账户已登录或不存在！");
+                    }
                 }
                 else
                 {
-                    //提示输入长度不对
-                    MessageBox.Show("请输入正确的邀请码！");
+                    MessageBox.Show("连接数据库失败！");
                 }
-
             }
-            catch
+            else
             {
-                //提示输入不是数字
-                MessageBox.Show("输入错误，请重新输入！");
-
+                MessageBox.Show("输入长度有误！");
             }
         }
     }
 }
+

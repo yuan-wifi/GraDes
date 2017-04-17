@@ -53,6 +53,7 @@
             this.Invitecode.Name = "Invitecode";
             this.Invitecode.Size = new System.Drawing.Size(304, 62);
             this.Invitecode.TabIndex = 1;
+            this.Invitecode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Invitecode_KeyPress);
             // 
             // Login
             // 
