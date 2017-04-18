@@ -13,7 +13,7 @@ namespace test
 {
     public partial class LoginForm : Form
     {
-        SqlConnector sql = new SqlConnector();
+        DataBase sql = new DataBase();
         public LoginForm()
         {
             InitializeComponent();
@@ -44,7 +44,7 @@ namespace test
                 int invcode = int.Parse(Invitecode.Text);
 
                 //数据库字符串拼接
-                SqlConnector.ConnStr = "Data Source = SENFOND;Initial Catalog = gra_des;Trusted_Connection=true;";
+                DataBase.ConnStr = "Data Source = SENFOND;Initial Catalog = gra_des;Trusted_Connection=true;";
                 if (sql.Link())
                 {
                     if (sql.Checkcode(invcode))

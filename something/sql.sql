@@ -1,0 +1,117 @@
+USE [zc_ps]
+GO
+
+/****** Object:  Table [dbo].[中学人员信息表]    Script Date: 2017-4-18 11:30:24 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[中学人员信息表](
+	[评审编号] [nvarchar](40) NULL,
+	[单位所在市州] [nvarchar](50) NULL,
+	[单位所在县（区）] [nvarchar](50) NULL,
+	[单位所在区域] [nvarchar](50) NULL,
+	[单位层次] [nvarchar](50) NULL,
+	[单位类别] [nvarchar](50) NULL,
+	[单位名称] [nvarchar](30) NULL,
+	[评委会名称] [nvarchar](50) NULL,
+	[姓名] [nvarchar](16) NULL,
+	[身份证号码] [nvarchar](18) NULL,
+	[性别] [nvarchar](2) NULL,
+	[政治面貌] [nvarchar](10) NULL,
+	[民族] [nvarchar](20) NULL,
+	[出生日期] [datetime] NULL,
+	[职业类别] [nvarchar](50) NULL,
+	[现任专业技术职务] [nvarchar](50) NULL,
+	[取得现专业技术职务任职资格时间] [datetime] NULL,
+	[聘任起始时间] [datetime] NULL,
+	[拟评审专业技术职务] [nvarchar](50) NULL,
+	[申报学科] [nvarchar](50) NULL,
+	[现从事专业] [nvarchar](50) NULL,
+	[职教专业课名称] [nvarchar](20) NULL,
+	[任教层次] [nvarchar](50) NULL,
+	[毕业学校] [nvarchar](50) NULL,
+	[毕业时间] [datetime] NULL,
+	[毕业专业] [nvarchar](50) NULL,
+	[毕业专业类别] [nvarchar](50) NULL,
+	[最高学历] [nvarchar](50) NULL,
+	[学位] [nvarchar](50) NULL,
+	[晋升类型] [nvarchar](50) NULL,
+	[参加工作时间] [datetime] NULL,
+	[现任党政职务] [nvarchar](50) NULL,
+	[年度考核优秀次数] [smallint] NULL,
+	[年度考核合格次数] [smallint] NULL,
+	[年度考核基本合格次数] [smallint] NULL,
+	[年度考核不合格次数] [smallint] NULL,
+	[计算机考试级别] [nvarchar](50) NULL,
+	[计算机考试成绩] [nvarchar](50) NULL,
+	[计算机考试发证日期] [datetime] NULL,
+	[计算机未（免）考原因] [nvarchar](50) NULL,
+	[是否答辩] [nvarchar](50) NULL,
+	[答辩原因] [nvarchar](50) NULL,
+	[学习层次] [nvarchar](50) NULL,
+	[学习起始时间] [datetime] NULL,
+	[毕（结）业时间] [datetime] NULL,
+	[毕（结）业学校] [nvarchar](50) NULL,
+	[所学专业] [nvarchar](50) NULL,
+	[教师资格证类型] [nvarchar](50) NULL,
+	[主管部门名称] [nvarchar](50) NULL,
+	[主管部门意见] [nvarchar](10) NULL,
+	[上报时间] [datetime] NULL,
+	[上报人] [nvarchar](16) NULL,
+	[上报人联系方式] [nvarchar](15) NULL,
+	[上报单位] [nvarchar](50) NULL,
+	[序号] [int] NULL,
+	[备注] [nvarchar](255) NULL,
+	[参加何种学术团体] [nvarchar](20) NULL,
+	[任何职务] [nvarchar](20) NULL,
+	[主要社会兼职] [nvarchar](20) NULL,
+	[获荣誉称号情况] [text] NULL,
+	[主要学习和工作经历] [text] NULL,
+	[教学实验简况] [text] NULL,
+	[教学研究情况] [text] NULL,
+	[培养青年教师] [text] NULL,
+	[最高学历与现从事专业一致] [nvarchar](2) NULL,
+	[师德表现情况] [text] NULL,
+	[省学科组总人数] [int] NULL,
+	[省学科组参加投票人数] [int] NULL,
+	[省学科组同意人数] [int] NULL,
+	[省学科组不同意人数] [int] NULL,
+	[省学科组弃权人数] [int] NULL,
+	[省学科组表决结果] [nvarchar](50) NULL,
+	[省学科组评审日期] [datetime] NULL,
+	[表决评委会名称] [nvarchar](50) NULL,
+	[评委会总人数] [int] NULL,
+	[评委会参加投票人数] [int] NULL,
+	[评委会同意人数] [int] NULL,
+	[评委会不同意人数] [int] NULL,
+	[评委会弃权人数] [int] NULL,
+	[评委会表决结果] [nvarchar](50) NULL,
+	[评委会评审日期] [datetime] NULL,
+	[是否审批] [nvarchar](50) NULL,
+	[未审批原因] [nvarchar](50) NULL,
+	[审批时间] [datetime] NULL,
+	[是否发文] [nvarchar](3) NULL,
+	[不发文原因] [nvarchar](50) NULL,
+	[表序号1] [char](4) NULL,
+	[表序号2] [int] NULL,
+	[表序号3] [int] NULL,
+	[答辩结果] [nvarchar](16) NULL,
+	[评审序号] [int] NULL,
+	[省学科组组长] [nvarchar](8) NULL,
+	[轮次] [int] NULL,
+	[曾用名] [nvarchar](50) NULL,
+	[所获学位] [nvarchar](50) NULL,
+	[学习地点] [nvarchar](255) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
