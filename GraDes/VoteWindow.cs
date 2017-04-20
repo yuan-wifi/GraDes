@@ -23,33 +23,34 @@ namespace test
         {
             DataG.DataSource = db.Loadvoteinfor(pici).Tables[0];
             //设置DataGridView控件外观
-            DataG.Columns[0].HeaderText = "姓名";
-            DataG.Columns[1].HeaderText = "身份证号";
-            DataG.Columns[2].HeaderText = "地市州";
-            DataG.Columns[3].HeaderText = "所在单位";
-            DataG.Columns[4].HeaderText = "拟评审专业技术职务";
-            DataG.Columns[5].HeaderText = "学科组";
+            DataG.Columns[0].HeaderText = "评审编号";
+            DataG.Columns[1].HeaderText = "姓名";
+            DataG.Columns[2].HeaderText = "身份证号";
+            DataG.Columns[3].HeaderText = "地市州";
+            DataG.Columns[4].HeaderText = "所在单位";
+            DataG.Columns[5].HeaderText = "拟评审专业技术职务";
+            DataG.Columns[6].HeaderText = "学科组";
             //添加同意CheckBox
             DataGridViewCheckBoxColumn agreeCheckBox = new DataGridViewCheckBoxColumn();
             agreeCheckBox.Name = "agree";
             agreeCheckBox.HeaderText = "赞成";
-            this.DataG.Columns.Insert(6, agreeCheckBox);
+            this.DataG.Columns.Insert(7, agreeCheckBox);
             //添加不同意CheckBox
             DataGridViewCheckBoxColumn disagreeCheckBox = new DataGridViewCheckBoxColumn();
             disagreeCheckBox.Name = "disagree";
             disagreeCheckBox.HeaderText = "反对";
-            this.DataG.Columns.Insert(7, disagreeCheckBox);
+            this.DataG.Columns.Insert(8, disagreeCheckBox);
             //添加弃权CheckBox
             DataGridViewCheckBoxColumn giveupCheckBox = new DataGridViewCheckBoxColumn();
             giveupCheckBox.Name = "giveup";
             giveupCheckBox.HeaderText = "放弃";
-            this.DataG.Columns.Insert(8, giveupCheckBox);
+            this.DataG.Columns.Insert(9, giveupCheckBox);
             //不允许自增行
             DataG.AllowUserToAddRows = false;
             //表头不换行
             DataG.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
             //循环前6列禁止点击表头
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 7; i++)
             {
                 this.DataG.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
                 DataG.Columns[i].ReadOnly = true;
@@ -63,9 +64,9 @@ namespace test
             int count = DataG.RowCount;
             for (int i = 0; i < count; i++)
             {
-                DataG.Rows[i].Cells[6].Value = true;
-                DataG.Rows[i].Cells[7].Value = false;
+                DataG.Rows[i].Cells[7].Value = true;
                 DataG.Rows[i].Cells[8].Value = false;
+                DataG.Rows[i].Cells[9].Value = false;
             }
         }
 
@@ -75,9 +76,9 @@ namespace test
             int count = DataG.RowCount;
             for (int i = 0; i < count; i++)
             {
-                DataG.Rows[i].Cells[6].Value = false;
-                DataG.Rows[i].Cells[7].Value = true;
-                DataG.Rows[i].Cells[8].Value = false;
+                DataG.Rows[i].Cells[7].Value = false;
+                DataG.Rows[i].Cells[8].Value = true;
+                DataG.Rows[i].Cells[9].Value = false;
             }
         }
 
@@ -87,9 +88,9 @@ namespace test
             int count = DataG.RowCount;
             for (int i = 0; i < count; i++)
             {
-                DataG.Rows[i].Cells[6].Value = false;
                 DataG.Rows[i].Cells[7].Value = false;
-                DataG.Rows[i].Cells[8].Value = true;
+                DataG.Rows[i].Cells[8].Value = false;
+                DataG.Rows[i].Cells[9].Value = true;
             }
         }
 
@@ -99,9 +100,9 @@ namespace test
             int count = DataG.RowCount;
             for (int i = 0; i < count; i++)
             {
-                DataG.Rows[i].Cells[6].Value = false;
                 DataG.Rows[i].Cells[7].Value = false;
                 DataG.Rows[i].Cells[8].Value = false;
+                DataG.Rows[i].Cells[9].Value = false;
             }
         }
 
@@ -111,10 +112,10 @@ namespace test
             bool isallcheck = true;
             for (int i = 0; i < count; i++)
             {
-                bool cell6 = Convert.ToBoolean(DataG.Rows[i].Cells[6].Value);
                 bool cell7 = Convert.ToBoolean(DataG.Rows[i].Cells[7].Value);
                 bool cell8 = Convert.ToBoolean(DataG.Rows[i].Cells[8].Value);
-                if (!cell6 && !cell7 && !cell8)
+                bool cell9 = Convert.ToBoolean(DataG.Rows[i].Cells[9].Value);
+                if (!cell7 && !cell8 && !cell9)
                 {
                     isallcheck = false;
                     break;
