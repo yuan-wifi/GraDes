@@ -46,6 +46,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBase.cs" />
+    <Compile Include="gra_desDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>gra_desDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="LoginWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +80,17 @@
     <EmbeddedResource Include="VoteWindow.resx">
       <DependentUpon>VoteWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="gra_desDataSet.xsc">
+      <DependentUpon>gra_desDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="gra_desDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>gra_desDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="gra_desDataSet.xss">
+      <DependentUpon>gra_desDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

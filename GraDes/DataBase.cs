@@ -71,9 +71,24 @@ namespace test
                 Conn.Close();
             }
         }
-        public string[] Loadvoteinfor(string sql)
+        //加载投票信息
+        public DataSet Loadvoteinfor(int sql)
         {
-            string[] str = new string[8];
+            string sel = "select 姓名,身份证号码,单位所在市州,单位所在区域,拟评审专业技术职务,评委会名称 from 中学人员信息表 where 轮次="+sql+" ";
+            DataSet ds = new DataSet();
+            SqlDataAdapter da = new SqlDataAdapter();
+            try
+            {
+                Conn.ConnectionString = ConnStr;
+                da.SelectCommand = new SqlCommand(sel, Conn);
+                da.Fill(ds);
+            }
+            finally
+            {
+                Conn.Close();
+            }
+            return ds;
         }
+
     }
 }

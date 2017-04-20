@@ -44,7 +44,7 @@ namespace test
                 int invcode = int.Parse(Invitecode.Text);
 
                 //数据库字符串拼接
-                DataBase.ConnStr = "Data Source = SENFOND;Initial Catalog = gra_des;Trusted_Connection=true;";
+                DataBase.ConnStr = "Data Source=.;Initial Catalog=gra_des;Trusted_Connection=True";
                 if (sql.Link())
                 {
                     if (sql.Checkcode(invcode))
