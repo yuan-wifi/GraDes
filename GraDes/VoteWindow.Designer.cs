@@ -37,7 +37,6 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.DataG = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1.SuspendLayout();
@@ -47,23 +46,21 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 8;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.ColumnCount = 7;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.36364F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
             this.tableLayoutPanel1.Controls.Add(this.button3, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.button2, 5, 0);
             this.tableLayoutPanel1.Controls.Add(this.button1, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBox1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.button7, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.button6, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button4, 7, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button5, 6, 0);
+            this.tableLayoutPanel1.Controls.Add(this.button4, 6, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 555);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -75,9 +72,9 @@
             // button3
             // 
             this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button3.Location = new System.Drawing.Point(603, 3);
+            this.button3.Location = new System.Drawing.Point(700, 3);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(94, 41);
+            this.button3.Size = new System.Drawing.Size(93, 41);
             this.button3.TabIndex = 2;
             this.button3.Text = "全部放弃";
             this.button3.UseVisualStyleBackColor = true;
@@ -86,9 +83,9 @@
             // button2
             // 
             this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Location = new System.Drawing.Point(703, 3);
+            this.button2.Location = new System.Drawing.Point(799, 3);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(94, 41);
+            this.button2.Size = new System.Drawing.Size(93, 41);
             this.button2.TabIndex = 1;
             this.button2.Text = "全部重选";
             this.button2.UseVisualStyleBackColor = true;
@@ -97,9 +94,9 @@
             // button1
             // 
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Location = new System.Drawing.Point(503, 3);
+            this.button1.Location = new System.Drawing.Point(601, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 41);
+            this.button1.Size = new System.Drawing.Size(93, 41);
             this.button1.TabIndex = 0;
             this.button1.Text = "全部反对";
             this.button1.UseVisualStyleBackColor = true;
@@ -111,25 +108,26 @@
             this.textBox1.Font = new System.Drawing.Font("宋体", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox1.Location = new System.Drawing.Point(3, 3);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(294, 41);
+            this.textBox1.Size = new System.Drawing.Size(394, 41);
             this.textBox1.TabIndex = 5;
             // 
             // button7
             // 
             this.button7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button7.Location = new System.Drawing.Point(303, 3);
+            this.button7.Location = new System.Drawing.Point(403, 3);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(94, 41);
+            this.button7.Size = new System.Drawing.Size(93, 41);
             this.button7.TabIndex = 7;
             this.button7.Text = "搜索";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button6
             // 
             this.button6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button6.Location = new System.Drawing.Point(403, 3);
+            this.button6.Location = new System.Drawing.Point(502, 3);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(94, 41);
+            this.button6.Size = new System.Drawing.Size(93, 41);
             this.button6.TabIndex = 6;
             this.button6.Text = "全部赞成";
             this.button6.UseVisualStyleBackColor = true;
@@ -138,23 +136,13 @@
             // button4
             // 
             this.button4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button4.Location = new System.Drawing.Point(903, 3);
+            this.button4.Location = new System.Drawing.Point(898, 3);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(94, 41);
+            this.button4.Size = new System.Drawing.Size(99, 41);
             this.button4.TabIndex = 3;
             this.button4.Text = "提交投票";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button5
-            // 
-            this.button5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button5.Location = new System.Drawing.Point(803, 3);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(94, 41);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "列出未选";
-            this.button5.UseVisualStyleBackColor = true;
             // 
             // DataG
             // 
@@ -180,6 +168,7 @@
             this.DataG.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DataG.Size = new System.Drawing.Size(994, 535);
             this.DataG.TabIndex = 2;
+            this.DataG.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataG_CellMouseDoubleClick);
             // 
             // groupBox1
             // 
@@ -218,7 +207,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.DataGridView DataG;
         private System.Windows.Forms.Button button6;

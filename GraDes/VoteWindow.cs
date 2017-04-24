@@ -19,38 +19,39 @@ namespace test
         }
         DataBase db = new DataBase();
         int pici = 1;
+
+        #region 窗体载入
         private void VoteWindow_Load(object sender, EventArgs e)
         {
             DataG.DataSource = db.Loadvoteinfor(pici).Tables[0];
             //设置DataGridView控件外观
-            DataG.Columns[0].HeaderText = "评审编号";
-            DataG.Columns[1].HeaderText = "姓名";
-            DataG.Columns[2].HeaderText = "身份证号";
-            DataG.Columns[3].HeaderText = "地市州";
-            DataG.Columns[4].HeaderText = "所在单位";
-            DataG.Columns[5].HeaderText = "拟评审专业技术职务";
-            DataG.Columns[6].HeaderText = "学科组";
+            DataG.Columns[0].HeaderText = "姓名";
+            DataG.Columns[1].HeaderText = "身份证号";
+            DataG.Columns[2].HeaderText = "地市州";
+            DataG.Columns[3].HeaderText = "所在单位";
+            DataG.Columns[4].HeaderText = "拟评审专业技术职务";
+            DataG.Columns[5].HeaderText = "学科组";
             //添加同意CheckBox
             DataGridViewCheckBoxColumn agreeCheckBox = new DataGridViewCheckBoxColumn();
             agreeCheckBox.Name = "agree";
             agreeCheckBox.HeaderText = "赞成";
-            this.DataG.Columns.Insert(7, agreeCheckBox);
+            this.DataG.Columns.Insert(6, agreeCheckBox);
             //添加不同意CheckBox
             DataGridViewCheckBoxColumn disagreeCheckBox = new DataGridViewCheckBoxColumn();
             disagreeCheckBox.Name = "disagree";
             disagreeCheckBox.HeaderText = "反对";
-            this.DataG.Columns.Insert(8, disagreeCheckBox);
+            this.DataG.Columns.Insert(7, disagreeCheckBox);
             //添加弃权CheckBox
             DataGridViewCheckBoxColumn giveupCheckBox = new DataGridViewCheckBoxColumn();
             giveupCheckBox.Name = "giveup";
             giveupCheckBox.HeaderText = "放弃";
-            this.DataG.Columns.Insert(9, giveupCheckBox);
+            this.DataG.Columns.Insert(8, giveupCheckBox);
             //不允许自增行
             DataG.AllowUserToAddRows = false;
             //表头不换行
             DataG.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
             //循环前6列禁止点击表头
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 6; i++)
             {
                 this.DataG.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
                 DataG.Columns[i].ReadOnly = true;
@@ -58,64 +59,71 @@ namespace test
             //设置DataGridView控件在自动调整列宽时使用的模式
             DataG.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
         }
-        //全部赞成按钮事件
+        #endregion
+
+        #region 全部赞成
         private void button6_Click(object sender, EventArgs e)
         {
             int count = DataG.RowCount;
             for (int i = 0; i < count; i++)
             {
-                DataG.Rows[i].Cells[7].Value = true;
+                DataG.Rows[i].Cells[6].Value = true;
+                DataG.Rows[i].Cells[7].Value = false;
                 DataG.Rows[i].Cells[8].Value = false;
-                DataG.Rows[i].Cells[9].Value = false;
             }
         }
+        #endregion
 
-        //全部反对按钮事件
+        #region 全部反对
         private void button1_Click(object sender, EventArgs e)
         {
             int count = DataG.RowCount;
             for (int i = 0; i < count; i++)
             {
-                DataG.Rows[i].Cells[7].Value = false;
-                DataG.Rows[i].Cells[8].Value = true;
-                DataG.Rows[i].Cells[9].Value = false;
+                DataG.Rows[i].Cells[6].Value = false;
+                DataG.Rows[i].Cells[7].Value = true;
+                DataG.Rows[i].Cells[8].Value = false;
             }
         }
+        #endregion
 
-        //全部放弃按钮事件
+        #region 全部放弃
         private void button3_Click(object sender, EventArgs e)
         {
             int count = DataG.RowCount;
             for (int i = 0; i < count; i++)
             {
+                DataG.Rows[i].Cells[6].Value = false;
                 DataG.Rows[i].Cells[7].Value = false;
-                DataG.Rows[i].Cells[8].Value = false;
-                DataG.Rows[i].Cells[9].Value = true;
+                DataG.Rows[i].Cells[8].Value = true;
             }
         }
+        #endregion
 
-        //全部重选按钮事件
+        #region 全部重选
         private void button2_Click(object sender, EventArgs e)
         {
             int count = DataG.RowCount;
             for (int i = 0; i < count; i++)
             {
+                DataG.Rows[i].Cells[6].Value = false;
                 DataG.Rows[i].Cells[7].Value = false;
                 DataG.Rows[i].Cells[8].Value = false;
-                DataG.Rows[i].Cells[9].Value = false;
             }
         }
+        #endregion
 
+        #region 提交投票
         private void button4_Click(object sender, EventArgs e)
         {
             int count = DataG.RowCount;
             bool isallcheck = true;
             for (int i = 0; i < count; i++)
             {
+                bool cell6 = Convert.ToBoolean(DataG.Rows[i].Cells[6].Value);
                 bool cell7 = Convert.ToBoolean(DataG.Rows[i].Cells[7].Value);
                 bool cell8 = Convert.ToBoolean(DataG.Rows[i].Cells[8].Value);
-                bool cell9 = Convert.ToBoolean(DataG.Rows[i].Cells[9].Value);
-                if (!cell7 && !cell8 && !cell9)
+                if (!cell6 && !cell7 && !cell8)
                 {
                     isallcheck = false;
                     break;
@@ -134,5 +142,96 @@ namespace test
                 MessageBox.Show("你有未完成的投票，请完成投票");
             }
         }
+        #endregion
+
+        #region 搜索功能
+        //查找并定位DataG　单元格
+        public static int RowCount = 0;
+        ///记录已查找过的行数
+        public static int SetGetRow
+        {
+            set
+            {
+                if (RowCount != value) { RowCount = value; }
+            }
+            get { return RowCount; }
+        }
+
+        ///
+        /// 查找相应内容并定位表格(精确+模糊)
+        /// /// 要查找的字符串内容
+        /// 要查找的表格名称
+
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+            int row = DataG.Rows.Count;//得到总行数
+            int cell = DataG.Rows[1].Cells.Count;//得到总列数
+            int _length = this.textBox1.Text.Trim().Length;
+            if (_length > 0)
+            {
+                for (int i = SetGetRow; i < row; i++)//得到总行数并在之内循环
+                {
+                    for (int j = 0; j < cell; j++)//得到总列数并在之内循环
+                    {   //精确查找
+                        if (DataG.Rows[i].Cells[j].Value != null)
+                        {
+                            if (this.textBox1.Text.Trim() == DataG.Rows[i].Cells[j].Value.ToString().Trim())
+                            { //对比TexBox中的值是否与dataGridView中的值相同（上面这句）
+                                DataG.CurrentCell = DataG[j, i];//定位到相同的单元格
+                                DataG.Rows[i].Selected = true;//定位到行
+                                SetGetRow = i + 1; return;//返回
+                            }
+                            //模糊查找定位（连续长度相同才认为是相似）
+                            /*模糊查找定位算法 
+                              从1到对应的表格内容长度查找 
+                              先找到第一个字符与要查找的内容对应的第一个字符相同的然后查找后面的相同长度的内容是否相同，
+                              相同则定位到此行 */
+
+                        }
+                        //模糊查找
+                        if (DataG.Rows[i].Cells[j].Value != null)
+                        {
+                            for (int k = 0; k < DataG.Rows[i].Cells[j].Value.ToString().Trim().Length; k++)
+                            {
+                                if (_length <= DataG.Rows[i].Cells[j].Value.ToString().Trim().Length - k)//判断要查找内容的长度是否小于对比的内容的长度
+                                {
+                                    if (this.textBox1.Text.Trim().Substring(0, 1) == DataG.Rows[i].Cells[j].Value.ToString().Trim().Substring(k, 1))//判断第一个字符是否与要对比的内容的第一个字符相同
+                                    {
+                                        if (this.textBox1.Text.Trim() == DataG.Rows[i].Cells[j].Value.ToString().Trim().Substring(k, _length))//判断是查找内容与对比内容否相等
+                                        {
+                                            DataG.CurrentCell = DataG[j, i];//定位到相同的单元格
+                                            DataG.Rows[i].Selected = true;//定位到行
+                                            SetGetRow = i + 1; return;//返回
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                SetGetRow = 0;
+                MessageBox.Show("没有再次找到相关记录，或没有与之相似的记录！", "搜索结果", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("输入搜索条件有误！", "搜索结果", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+        }
+        #endregion
+
+        #region 双击单元格
+        private void DataG_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            //实例化子窗体
+            ViewInforWindow viewinfor = new ViewInforWindow();
+            //弹出模式对话框（子窗体）
+            viewinfor.ShowDialog();
+            string  temp = DataG.Rows[e.RowIndex].Cells[1].Value.ToString();
+            MessageBox.Show(temp);
+        }
+        #endregion
     }
 }
