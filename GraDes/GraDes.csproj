@@ -54,6 +54,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewInforWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,24 +71,28 @@
     <Compile Include="VoteWindow.Designer.cs">
       <DependentUpon>VoteWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="WaittingWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WaittingWindow.Designer.cs">
+      <DependentUpon>WaittingWindow.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="LoginWindow.resx">
       <DependentUpon>LoginWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="ViewInforWindow.resx">
       <DependentUpon>ViewInforWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VoteWindow.resx">
       <DependentUpon>VoteWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WaittingWindow.resx">
+      <DependentUpon>WaittingWindow.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -124,6 +133,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\test.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Waitting.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

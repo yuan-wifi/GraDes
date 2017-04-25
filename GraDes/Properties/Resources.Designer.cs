@@ -63,89 +63,9 @@ namespace test.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap _1475225750384 {
+        internal static System.Drawing.Bitmap Waitting {
             get {
-                object obj = ResourceManager.GetObject("1475225750384", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap _2013411101228764860 {
-            get {
-                object obj = ResourceManager.GetObject("2013411101228764860", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap _6fb83980eff61ad3d56eb72ab3195375 {
-            get {
-                object obj = ResourceManager.GetObject("6fb83980eff61ad3d56eb72ab3195375", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap a83e6dc4b3b02a1f8a4899603245f0b4 {
-            get {
-                object obj = ResourceManager.GetObject("a83e6dc4b3b02a1f8a4899603245f0b4", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap cd5c1be8e5ce053227a0b31e85836e36 {
-            get {
-                object obj = ResourceManager.GetObject("cd5c1be8e5ce053227a0b31e85836e36", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap dongman_changjing_003 {
-            get {
-                object obj = ResourceManager.GetObject("dongman_changjing-003", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap haokan_de_dongman_004 {
-            get {
-                object obj = ResourceManager.GetObject("haokan_de_dongman-004", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap test {
-            get {
-                object obj = ResourceManager.GetObject("test", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap 幽灵公主 {
-            get {
-                object obj = ResourceManager.GetObject("幽灵公主", resourceCulture);
+                object obj = ResourceManager.GetObject("Waitting", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

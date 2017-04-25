@@ -118,31 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="cd5c1be8e5ce053227a0b31e85836e36" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cd5c1be8e5ce053227a0b31e85836e36.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="幽灵公主" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\幽灵公主.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="dongman_changjing-003" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dongman_changjing-003.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="6fb83980eff61ad3d56eb72ab3195375" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\6fb83980eff61ad3d56eb72ab3195375.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="a83e6dc4b3b02a1f8a4899603245f0b4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\a83e6dc4b3b02a1f8a4899603245f0b4.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="2013411101228764860" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\2013411101228764860.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="haokan_de_dongman-004" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\haokan_de_dongman-004.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="1475225750384" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\1475225750384.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="test" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\test.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Waitting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Waitting.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

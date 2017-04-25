@@ -135,7 +135,10 @@ namespace test
             }
             if (isallcheck)
             {
-                MessageBox.Show("OK!");
+                // 实例化子窗体
+                WaittingWindow waittingwindow = new WaittingWindow();
+                //弹出模式对话框（子窗体）
+                waittingwindow.ShowDialog();
             }
             else
             {
@@ -229,7 +232,7 @@ namespace test
             ViewInforWindow viewinfor = new ViewInforWindow();
             //弹出模式对话框（子窗体）
             viewinfor.ShowDialog();
-            string  temp = DataG.Rows[e.RowIndex].Cells[1].Value.ToString();
+            string temp = DataG.Rows[e.RowIndex].Cells[1].Value.ToString();
             MessageBox.Show(temp);
         }
         #endregion
