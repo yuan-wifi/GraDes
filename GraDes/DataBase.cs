@@ -27,9 +27,10 @@ namespace test
                 Conn.Close();
                 return true;
             }
-            catch
+            catch (Exception e)
             {
                 return false;
+                throw new Exception(e.Message);
             }
         }
         //校验邀请码&用户是否在线
@@ -74,7 +75,7 @@ namespace test
         //加载投票信息
         public DataSet Loadvoteinfor(int sql)
         {
-            string sel = "select 姓名,身份证号码,单位所在区域,单位名称,拟评审专业技术职务,评委会名称 from 中学人员信息表 where 轮次="+sql+ "";
+            string sel = "select 姓名,身份证号码,单位所在区域,单位名称,拟评审专业技术职务,评委会名称 from 中学人员信息表 where 轮次="+sql+ " order by 身份证号码 ";
             DataSet ds = new DataSet();
             SqlDataAdapter da = new SqlDataAdapter();
             try

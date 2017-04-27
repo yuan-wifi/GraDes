@@ -48,9 +48,10 @@ namespace test
             this.DataG.Columns.Insert(8, giveupCheckBox);
             //不允许自增行
             DataG.AllowUserToAddRows = false;
+            DataG.CellClick += DataG_CellClick;
             //表头不换行
             DataG.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
-            //循环前6列禁止点击表头
+            //循环前6列禁止点击
             for (int i = 0; i < 6; i++)
             {
                 this.DataG.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -59,6 +60,22 @@ namespace test
             //设置DataGridView控件在自动调整列宽时使用的模式
             DataG.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
         }
+        //实现复选框单选功能
+        private void DataG_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            int row = e.RowIndex;
+            int col = e.ColumnIndex;
+            if (col >= 6)
+            {
+                DataG.Rows[row].Cells[6].Value = false;
+                DataG.Rows[row].Cells[7].Value = false;
+                DataG.Rows[row].Cells[8].Value = false;
+                DataG.Rows[row].Cells[col].Value = true;
+            }
+
+        }
+    
         #endregion
 
         #region 全部赞成
@@ -150,7 +167,7 @@ namespace test
         #region 搜索功能
         //查找并定位DataG　单元格
         public static int RowCount = 0;
-        ///记录已查找过的行数
+        //记录已查找过的行数
         public static int SetGetRow
         {
             set
@@ -159,13 +176,7 @@ namespace test
             }
             get { return RowCount; }
         }
-
-        ///
-        /// 查找相应内容并定位表格(精确+模糊)
-        /// /// 要查找的字符串内容
-        /// 要查找的表格名称
-
-
+        
         private void button7_Click(object sender, EventArgs e)
         {
 
@@ -177,11 +188,13 @@ namespace test
                 for (int i = SetGetRow; i < row; i++)//得到总行数并在之内循环
                 {
                     for (int j = 0; j < cell; j++)//得到总列数并在之内循环
-                    {   //精确查找
+                    {   
+                        //精确查找
                         if (DataG.Rows[i].Cells[j].Value != null)
-                        {
+                        {   
+                            //对比TexBox中的值是否与dataGridView中的值相同
                             if (this.textBox1.Text.Trim() == DataG.Rows[i].Cells[j].Value.ToString().Trim())
-                            { //对比TexBox中的值是否与dataGridView中的值相同（上面这句）
+                            { 
                                 DataG.CurrentCell = DataG[j, i];//定位到相同的单元格
                                 DataG.Rows[i].Selected = true;//定位到行
                                 SetGetRow = i + 1; return;//返回
@@ -189,9 +202,9 @@ namespace test
                             //模糊查找定位（连续长度相同才认为是相似）
                             /*模糊查找定位算法 
                               从1到对应的表格内容长度查找 
-                              先找到第一个字符与要查找的内容对应的第一个字符相同的然后查找后面的相同长度的内容是否相同，
+                              先找到第一个字符与要查找的内容对应的第一个字符相同
+                              然后查找后面的相同长度的内容是否相同，
                               相同则定位到此行 */
-
                         }
                         //模糊查找
                         if (DataG.Rows[i].Cells[j].Value != null)
@@ -236,5 +249,6 @@ namespace test
             MessageBox.Show(temp);
         }
         #endregion
+
     }
 }

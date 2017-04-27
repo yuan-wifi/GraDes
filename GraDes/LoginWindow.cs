@@ -42,26 +42,17 @@ namespace test
             {
                 //某些操作
                 int invcode = int.Parse(Invitecode.Text);
-
-                //数据库字符串拼接
-                DataBase.ConnStr = "Data Source=.;Initial Catalog=gra_des;Trusted_Connection=True";
-                if (sql.Link())
+                
+                if (sql.Checkcode(invcode))
                 {
-                    if (sql.Checkcode(invcode))
-                    {
-                        VoteWindow vote = new VoteWindow();
-                        this.Hide();
-                        vote.ShowDialog();
-                        Application.ExitThread();
-                    }
-                    else
-                    {
-                        MessageBox.Show("账户已登录或不存在！");
-                    }
+                    VoteWindow vote = new VoteWindow();
+                    this.Hide();
+                    vote.ShowDialog();
+                    Application.ExitThread();
                 }
                 else
                 {
-                    MessageBox.Show("连接数据库失败！");
+                    MessageBox.Show("账户已登录或不存在！");
                 }
             }
             else

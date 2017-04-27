@@ -10,3 +10,4 @@ C:\Users\Sen\Desktop\GraDes\GraDes\obj\Debug\test.exe
 C:\Users\Sen\Desktop\GraDes\GraDes\obj\Debug\test.pdb
 C:\Users\Sen\Desktop\GraDes\GraDes\obj\Debug\test.ViewInforWindow.resources
 C:\Users\Sen\Desktop\GraDes\GraDes\obj\Debug\test.WaittingWindow.resources
+C:\Users\Sen\Desktop\GraDes\GraDes\obj\Debug\test.ConnectionWindow.resources
