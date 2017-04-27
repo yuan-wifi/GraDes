@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -40,12 +41,14 @@ namespace test
         #region 获取屏幕图像
         public Bitmap GetScreen()
         {
-            Bitmap bmp = new Bitmap(Screen.PrimaryScreen.Bounds.Width,
-                Screen.PrimaryScreen.Bounds.Height);
-            using (Graphics g = Graphics.FromImage(bmp))
+            string url = @"http://123.207.250.201/51040219960314001.jpg";
+            Image img;
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            using (WebResponse response = request.GetResponse())
             {
-                g.CopyFromScreen(0, 0, 0, 0, bmp.Size);
+                img = Image.FromStream(response.GetResponseStream());
             }
+            Bitmap bmp = new Bitmap(img);
             return bmp;
         }
         #endregion
