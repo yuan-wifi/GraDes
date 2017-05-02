@@ -13,13 +13,14 @@ namespace test
 {
     public partial class ViewInforWindow : Form
     {
-        public ViewInforWindow()
+        public ViewInforWindow(string idcard)
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             this.pictureBox1.BorderStyle = BorderStyle.FixedSingle;
             this.pictureBox1.BackColor = Color.DarkGray;
             this.pictureBox1.MouseWheel += new MouseEventHandler(pictureBox1_MouseWheel);
+            this.idcard = idcard;
         }
         Bitmap m_bmp;               //画布中的图像
         Point m_ptCanvas;           //画布原点在设备上的坐标
@@ -27,6 +28,7 @@ namespace test
         Point m_ptBmp;              //图像位于画布坐标系中的坐标
         float m_nScale = 1.0F;      //缩放比例
         Point m_ptMouseDown;        //鼠标点下是在设备坐标上的坐标
+        private string idcard;
 
         #region 窗体载入
         private void Form1_Load(object sender, EventArgs e)
@@ -38,18 +40,34 @@ namespace test
         }
         #endregion
 
-        #region 获取屏幕图像
+        #region 获取图像
         public Bitmap GetScreen()
         {
-            string url = @"http://123.207.250.201/51040219960314001.jpg";
-            Image img;
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            using (WebResponse response = request.GetResponse())
+            try
             {
-                img = Image.FromStream(response.GetResponseStream());
+                string url = @"http://123.207.250.201/" + idcard + ".jpg";
+                Image img;
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                using (WebResponse response = request.GetResponse())
+                {
+                    img = Image.FromStream(response.GetResponseStream());
+                }
+                Bitmap bmp = new Bitmap(img);
+                return bmp;
             }
-            Bitmap bmp = new Bitmap(img);
-            return bmp;
+            //未找到图片
+            catch
+            {
+                string errorurl = @"http://123.207.250.201/error.jpg";
+                Image errorimg;
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(errorurl);
+                using (WebResponse response = request.GetResponse())
+                {
+                    errorimg = Image.FromStream(response.GetResponseStream());
+                }
+                Bitmap errorbmp = new Bitmap(errorimg);
+                return errorbmp;
+            }
         }
         #endregion
 

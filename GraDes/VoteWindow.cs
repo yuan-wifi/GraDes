@@ -75,7 +75,7 @@ namespace test
             }
 
         }
-    
+
         #endregion
 
         #region 全部赞成
@@ -152,6 +152,34 @@ namespace test
             }
             if (isallcheck)
             {
+               
+                for (int i = 0; i < count; i++)
+                {
+                    bool cell6 = Convert.ToBoolean(DataG.Rows[i].Cells[6].Value);
+                    bool cell7 = Convert.ToBoolean(DataG.Rows[i].Cells[7].Value);
+                    bool cell8 = Convert.ToBoolean(DataG.Rows[i].Cells[8].Value);
+                    if (cell6)
+                    {
+                        string update = "update 中学人员信息表 set 评委会同意人数 +=1 where 身份证号码=" + DataG.Rows[i].Cells[1].Value;
+                        db.Submitvoteinfor(update);
+                    }
+                    else if (cell7)
+                    {
+                        string update = "update 中学人员信息表 set 评委会不同意人数 +=1 where 身份证号码=" + DataG.Rows[i].Cells[1].Value;
+                        db.Submitvoteinfor(update);
+                    }
+                    else if (cell8)
+                    {
+                        string update = "update 中学人员信息表 set 评委会弃权人数 +=1 where 身份证号码=" + DataG.Rows[i].Cells[1].Value;
+                        db.Submitvoteinfor(update);
+                    }
+                    else
+                    {
+                        MessageBox.Show("提交失败！");
+                        break;
+                    }
+                }
+                MessageBox.Show("提交成功！");
                 // 实例化子窗体
                 WaittingWindow waittingwindow = new WaittingWindow();
                 //弹出模式对话框（子窗体）
@@ -176,7 +204,7 @@ namespace test
             }
             get { return RowCount; }
         }
-        
+
         private void button7_Click(object sender, EventArgs e)
         {
 
@@ -188,13 +216,13 @@ namespace test
                 for (int i = SetGetRow; i < row; i++)//得到总行数并在之内循环
                 {
                     for (int j = 0; j < cell; j++)//得到总列数并在之内循环
-                    {   
+                    {
                         //精确查找
                         if (DataG.Rows[i].Cells[j].Value != null)
-                        {   
+                        {
                             //对比TexBox中的值是否与dataGridView中的值相同
                             if (this.textBox1.Text.Trim() == DataG.Rows[i].Cells[j].Value.ToString().Trim())
-                            { 
+                            {
                                 DataG.CurrentCell = DataG[j, i];//定位到相同的单元格
                                 DataG.Rows[i].Selected = true;//定位到行
                                 SetGetRow = i + 1; return;//返回
@@ -241,12 +269,11 @@ namespace test
         #region 双击单元格
         private void DataG_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            string idcard = DataG.Rows[e.RowIndex].Cells[1].Value.ToString();
             //实例化子窗体
-            ViewInforWindow viewinfor = new ViewInforWindow();
+            ViewInforWindow viewinfor = new ViewInforWindow(idcard);
             //弹出模式对话框（子窗体）
             viewinfor.ShowDialog();
-            string temp = DataG.Rows[e.RowIndex].Cells[1].Value.ToString();
-            MessageBox.Show(temp);
         }
         #endregion
 

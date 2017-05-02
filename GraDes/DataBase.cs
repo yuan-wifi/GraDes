@@ -90,5 +90,30 @@ namespace test
             }
             return ds;
         }
+        //提交投票结果
+        public string Submitvoteinfor(string sql)
+        {
+            string msg = "";
+
+            DataSet ds = new DataSet();
+            SqlDataAdapter da = new SqlDataAdapter();
+            try
+            {
+                Conn.ConnectionString = ConnStr;
+                da.SelectCommand = new SqlCommand(sql, Conn);
+                da.Fill(ds);
+            }
+            catch
+            {
+                msg = "修改失败！";
+                return msg;
+            }
+            finally
+            {
+                Conn.Close();
+            }
+            return msg;
+        }
+        
     }
 }

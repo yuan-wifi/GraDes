@@ -12,13 +12,15 @@ namespace test
 {
     public partial class WaittingWindow : Form
     {
+        
         public WaittingWindow()
         {
             InitializeComponent();
         }
-
+       
         private void WaittingWindow_Load(object sender, EventArgs e)
         {
+            
         }
     }
 }
