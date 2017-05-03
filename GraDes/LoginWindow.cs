@@ -45,7 +45,7 @@ namespace test
                 
                 if (sql.Checkcode(invcode))
                 {
-                    VoteWindow vote = new VoteWindow();
+                    VoteWindow vote = new VoteWindow(invcode);
                     this.Hide();
                     vote.ShowDialog();
                     Application.ExitThread();

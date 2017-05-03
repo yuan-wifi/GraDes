@@ -13,10 +13,12 @@ namespace test
 {
     public partial class VoteWindow : Form
     {
-        public VoteWindow()
+        public VoteWindow(int invcode)
         {
+            this.invcode = invcode;
             InitializeComponent();
         }
+
         DataBase db = new DataBase();
         int pici = 1;
 
@@ -133,6 +135,9 @@ namespace test
         #region 提交投票
         private void button4_Click(object sender, EventArgs e)
         {
+            List<string> listcell6 = new List<string>();//同意
+            List<string> listcell7 = new List<string>();//反对
+            List<string> listcell8 = new List<string>();//弃权
             int count = DataG.RowCount;
             bool isallcheck = true;
             for (int i = 0; i < count; i++)
@@ -152,7 +157,9 @@ namespace test
             }
             if (isallcheck)
             {
-               
+                string where6 = "";
+                string where7 = "";
+                string where8 = "";
                 for (int i = 0; i < count; i++)
                 {
                     bool cell6 = Convert.ToBoolean(DataG.Rows[i].Cells[6].Value);
@@ -160,26 +167,59 @@ namespace test
                     bool cell8 = Convert.ToBoolean(DataG.Rows[i].Cells[8].Value);
                     if (cell6)
                     {
-                        string update = "update 中学人员信息表 set 评委会同意人数 +=1 where 身份证号码=" + DataG.Rows[i].Cells[1].Value;
-                        db.Submitvoteinfor(update);
+                        listcell6.Add(DataG.Rows[i].Cells[1].Value.ToString());
+                        continue;
                     }
                     else if (cell7)
                     {
-                        string update = "update 中学人员信息表 set 评委会不同意人数 +=1 where 身份证号码=" + DataG.Rows[i].Cells[1].Value;
-                        db.Submitvoteinfor(update);
+                        listcell7.Add(DataG.Rows[i].Cells[1].Value.ToString());
+                        continue;
                     }
                     else if (cell8)
                     {
-                        string update = "update 中学人员信息表 set 评委会弃权人数 +=1 where 身份证号码=" + DataG.Rows[i].Cells[1].Value;
-                        db.Submitvoteinfor(update);
+                        listcell8.Add(DataG.Rows[i].Cells[1].Value.ToString());
+                        continue;
                     }
                     else
                     {
-                        MessageBox.Show("提交失败！");
+                        MessageBox.Show("提交失败", "提交结果", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                     }
                 }
-                MessageBox.Show("提交成功！");
+
+                if(listcell6.Count != 0)
+                {
+                    for (int x = 0; x < listcell6.Count; x++)
+                    {
+                        where6 = where6 + "身份证号码 = " + listcell6[x] + "or";
+                    }
+                    string update6 = "update 中学人员信息表 set 评委会同意人数 +=1 where " + where6;
+                    db.Submitvoteinfor(update6);
+                }
+                else
+                if (listcell7.Count != 0)
+                {
+                    for (int y = 0; y < listcell7.Count; y++)
+                    {
+                        where7 = where7 + "身份证号码 = " + listcell7[y] + "or";
+                    }
+                    string update7 = "update 中学人员信息表 set 评委会不同意人数 +=1 where " + where7;
+                    db.Submitvoteinfor(update7);
+                }
+                else
+                if(listcell8.Count != 0)
+                {
+                    for (int z = 0; z < listcell8.Count; z++)
+                    {
+                        where8 = where8 + "身份证号码 = " + listcell8[z] + "or";
+                    }
+                    string update8 = "update 中学人员信息表 set 评委会弃权人数 +=1 where " + where8;
+                    db.Submitvoteinfor(update8);
+                }
+                //更新用户状态
+                db.Updatestatus(invcode);
+
+                MessageBox.Show("你已成功提交投票", "提交结果", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 // 实例化子窗体
                 WaittingWindow waittingwindow = new WaittingWindow();
                 //弹出模式对话框（子窗体）
@@ -195,6 +235,8 @@ namespace test
         #region 搜索功能
         //查找并定位DataG　单元格
         public static int RowCount = 0;
+        private int invcode;
+
         //记录已查找过的行数
         public static int SetGetRow
         {

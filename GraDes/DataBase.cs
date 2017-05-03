@@ -38,18 +38,19 @@ namespace test
         {
             try
             {
-                string loginsql = "Select users_status from users_infor where users_code=" + code;
+                string loginsql = "Select users_status,users_act from users_infor where users_code=" + code;
                 SqlConnection Conn = new SqlConnection(ConnStr);
                 SqlCommand com = new SqlCommand(loginsql, Conn);
                 Conn.Open();
                 SqlDataReader dr = com.ExecuteReader();
-                dr.Read();//从dr对象中读取第一条数据
+                dr.Read();
                 if (dr.HasRows)//查询用户是否存在
                 {
-                    if (dr["users_status"].ToString() == "0")//检查用户是否已在线
+                    //检查用户在线和判断用户状态
+                    if (dr["users_status"].ToString() == "0" && (dr["users_act"].ToString()=="0" || dr["users_act"].ToString() == "2"))
                     {
                         Conn.Close();//关闭第一次查询
-                        string upsql = "update users_infor set users_status = 1 where users_code =" + code;
+                        string upsql = "update users_infor set users_status = 1,users_act = 1 where users_code =" + code;
                         DataSet ds = new DataSet();
                         Conn.ConnectionString = ConnStr;
                         SqlDataAdapter da = new SqlDataAdapter();
@@ -114,6 +115,48 @@ namespace test
             }
             return msg;
         }
-        
+        //提交完成更新用户状态
+        public string Updatestatus(int code)
+        {
+            string msg = "";
+            string sql = "update users_infor set users_status = 0,users_act = 2 where users_code=" + code;
+            DataSet ds = new DataSet();
+            SqlDataAdapter da = new SqlDataAdapter();
+            try
+            {
+                Conn.ConnectionString = ConnStr;
+                da.SelectCommand = new SqlCommand(sql, Conn);
+                da.Fill(ds);
+            }
+            catch
+            {
+                msg = "修改失败！";
+                return msg;
+            }
+            finally
+            {
+                Conn.Close();
+            }
+            return msg;
+        }
+        //查询其余用户是否完成投票 
+        public int Selectissubmit()
+        {
+            int msg;
+            try
+            {
+                string sql = "select count(*) from users_infor where users_act = 1";
+                SqlConnection Conn = new SqlConnection(ConnStr);
+                SqlCommand com = new SqlCommand(sql, Conn);
+                Conn.Open();
+                object obj = com.ExecuteScalar();
+                msg = (int)obj;
+            }
+            finally
+            {
+                Conn.Close();
+            }
+            return msg;
+        }
     }
 }
