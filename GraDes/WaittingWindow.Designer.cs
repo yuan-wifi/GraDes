@@ -70,7 +70,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "四川省教育厅全省中小学高级职称高评委网络投票系统";
             this.TransparencyKey = System.Drawing.Color.Transparent;
-            this.Load += new System.EventHandler(this.WaittingWindow_Load);
+            this.Shown += new System.EventHandler(this.WaittingWindow_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

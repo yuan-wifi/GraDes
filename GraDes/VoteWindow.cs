@@ -13,14 +13,19 @@ namespace test
 {
     public partial class VoteWindow : Form
     {
-        public VoteWindow(int invcode)
+        public VoteWindow(int pici, int turn, int invcode)
         {
+            this.pici = pici;
+            this.turn = turn;
             this.invcode = invcode;
             InitializeComponent();
         }
 
+        public static int RowCount = 0;
+        private int invcode;
+        private int pici;
+        private int turn;
         DataBase db = new DataBase();
-        int pici = 1;
 
         #region 窗体载入
         private void VoteWindow_Load(object sender, EventArgs e)
@@ -157,9 +162,9 @@ namespace test
             }
             if (isallcheck)
             {
-                string where6 = "";
-                string where7 = "";
-                string where8 = "";
+                string where6 = " ";
+                string where7 = " ";
+                string where8 = " ";
                 for (int i = 0; i < count; i++)
                 {
                     bool cell6 = Convert.ToBoolean(DataG.Rows[i].Cells[6].Value);
@@ -189,41 +194,47 @@ namespace test
 
                 if(listcell6.Count != 0)
                 {
-                    for (int x = 0; x < listcell6.Count; x++)
+                    where6 = listcell6[0];
+                    for (int x = 1; x < listcell6.Count; x++)
                     {
-                        where6 = where6 + "身份证号码 = " + listcell6[x] + "or";
+                        where6 = listcell6[x] + "," + where6;
                     }
-                    string update6 = "update 中学人员信息表 set 评委会同意人数 +=1 where " + where6;
+                    string update6 = "update 中学人员信息表 set 评委会同意人数 +=1 where 身份证号码 in(" + where6 +")";
                     db.Submitvoteinfor(update6);
                 }
-                else
+                
                 if (listcell7.Count != 0)
                 {
-                    for (int y = 0; y < listcell7.Count; y++)
+                    where7 = listcell7[0];
+                    for (int y = 1; y < listcell7.Count; y++)
                     {
-                        where7 = where7 + "身份证号码 = " + listcell7[y] + "or";
+                        where7 = listcell7[y] + "," + where7;
                     }
-                    string update7 = "update 中学人员信息表 set 评委会不同意人数 +=1 where " + where7;
+                    string update7 = "update 中学人员信息表 set 评委会不同意人数 +=1 where 身份证号码 in(" + where7 + ")";
                     db.Submitvoteinfor(update7);
                 }
-                else
+                
                 if(listcell8.Count != 0)
                 {
-                    for (int z = 0; z < listcell8.Count; z++)
+                    where8 = listcell8[0];
+                    for (int z = 1; z < listcell8.Count; z++)
                     {
-                        where8 = where8 + "身份证号码 = " + listcell8[z] + "or";
+                        where8 = listcell8[z] + "," + where8;
                     }
-                    string update8 = "update 中学人员信息表 set 评委会弃权人数 +=1 where " + where8;
+                    string update8 = "update 中学人员信息表 set 评委会弃权人数 +=1 where 身份证号码 in(" + where8 + ")";
                     db.Submitvoteinfor(update8);
                 }
+
                 //更新用户状态
                 db.Updatestatus(invcode);
 
                 MessageBox.Show("你已成功提交投票", "提交结果", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 // 实例化子窗体
-                WaittingWindow waittingwindow = new WaittingWindow();
+                WaittingWindow waittingwindow = new WaittingWindow(pici,turn,invcode);
+                this.Hide();
                 //弹出模式对话框（子窗体）
                 waittingwindow.ShowDialog();
+                Application.ExitThread();
             }
             else
             {
@@ -233,9 +244,6 @@ namespace test
         #endregion
 
         #region 搜索功能
-        //查找并定位DataG　单元格
-        public static int RowCount = 0;
-        private int invcode;
 
         //记录已查找过的行数
         public static int SetGetRow

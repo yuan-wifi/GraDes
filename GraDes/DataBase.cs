@@ -73,6 +73,25 @@ namespace test
                 Conn.Close();
             }
         }
+        //查询总共的批次数批次
+        public int Selectturn()
+        {
+            int msg;
+            try
+            {
+                string sql = "select count(distinct 轮次) from 中学人员信息表";
+                SqlConnection Conn = new SqlConnection(ConnStr);
+                SqlCommand com = new SqlCommand(sql, Conn);
+                Conn.Open();
+                object obj = com.ExecuteScalar();
+                msg = (int)obj;
+            }
+            finally
+            {
+                Conn.Close();
+            }
+            return msg;
+        }
         //加载投票信息
         public DataSet Loadvoteinfor(int sql)
         {
