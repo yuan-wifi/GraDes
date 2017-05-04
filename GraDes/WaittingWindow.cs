@@ -9,7 +9,6 @@ namespace test
         DataBase db = new DataBase();
         private int pici;
         private object turn;
-        private object pici1;
         private int invcode;
 
         public WaittingWindow(int pici, int turn, int invcode)

@@ -138,7 +138,7 @@ namespace test
         public string Updatestatus(int code)
         {
             string msg = "";
-            string sql = "update users_infor set users_status = 0,users_act = 2 where users_code=" + code;
+            string sql = "update users_infor set users_act = 2 where users_code=" + code;
             DataSet ds = new DataSet();
             SqlDataAdapter da = new SqlDataAdapter();
             try
