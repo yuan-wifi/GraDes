@@ -58,10 +58,14 @@ namespace test
         {
             if (sql.Link())
             {
+                Control.CheckForIllegalCrossThreadCalls = false;
+                Application.OpenForms["loading"].Close(); //关闭等待窗口
                 e.Cancel = false;
             }
             else
             {
+                Control.CheckForIllegalCrossThreadCalls = false;
+                Application.OpenForms["loading"].Close(); //关闭等待窗口
                 e.Cancel = true;
                 
             }
@@ -69,12 +73,12 @@ namespace test
 
         private void conBgw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            Control.CheckForIllegalCrossThreadCalls = false;
-            Application.OpenForms["loading"].Close();
+            
             if (e.Cancelled)
             {
                 MessageBox.Show("连接数据库失败！");
-            }else
+            }
+            else
             {
                 LoginForm vote = new LoginForm();
                 this.Hide();

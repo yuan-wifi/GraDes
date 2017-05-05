@@ -334,18 +334,19 @@ namespace test
                 //更新用户状态
                 db.Updatestatus(invcode);
                 MessageBox.Show("你已成功提交投票", "提交结果", MessageBoxButtons.OK, MessageBoxIcon.Information);
-               
+                Control.CheckForIllegalCrossThreadCalls = false;
+                Application.OpenForms["loading"].Close();
             }
             else
             {
+                Control.CheckForIllegalCrossThreadCalls = false;
+                Application.OpenForms["loading"].Close();
                 e.Cancel = true;
             }
         }
 
         private void BGW1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            Control.CheckForIllegalCrossThreadCalls = false;
-            Application.OpenForms["loading"].Close();
             if (e.Cancelled)
             {
                 MessageBox.Show("你有未完成的投票，请完成投票");
