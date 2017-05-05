@@ -39,6 +39,8 @@
             this.button4 = new System.Windows.Forms.Button();
             this.DataG = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.BGW1 = new System.ComponentModel.BackgroundWorker();
+            this.BGW2 = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataG)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -181,6 +183,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "人员信息";
             // 
+            // BGW1
+            // 
+            this.BGW1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BGW1_DoWork);
+            this.BGW1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BGW1_RunWorkerCompleted);
+            // 
+            // BGW2
+            // 
+            this.BGW2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BGW2_DoWork);
+            this.BGW2.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BGW2_RunWorkerCompleted);
+            // 
             // VoteWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -212,5 +224,7 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.ComponentModel.BackgroundWorker BGW1;
+        private System.ComponentModel.BackgroundWorker BGW2;
     }
 }

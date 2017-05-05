@@ -11,3 +11,4 @@ C:\Users\Sen\Desktop\GraDes\GraDes\obj\Debug\test.ViewInforWindow.resources
 C:\Users\Sen\Desktop\GraDes\GraDes\obj\Debug\test.WaittingWindow.resources
 C:\Users\Sen\Desktop\GraDes\GraDes\obj\Debug\test.ConnectionWindow.resources
 C:\Users\Sen\Desktop\GraDes\GraDes\obj\Debug\GraDes.csprojResolveAssemblyReference.cache
+C:\Users\Sen\Desktop\GraDes\GraDes\obj\Debug\test.Loading.resources

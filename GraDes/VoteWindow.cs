@@ -26,11 +26,13 @@ namespace test
         private int pici;
         private int turn;
         DataBase db = new DataBase();
+        DataTable dt = new DataTable();
 
         #region 窗体载入
         private void VoteWindow_Load(object sender, EventArgs e)
         {
-            DataG.DataSource = db.Loadvoteinfor(pici).Tables[0];
+            BGW2.RunWorkerAsync();
+            openwindow();
             //设置DataGridView控件外观
             DataG.Columns[0].HeaderText = "姓名";
             DataG.Columns[1].HeaderText = "身份证号";
@@ -66,6 +68,7 @@ namespace test
             }
             //设置DataGridView控件在自动调整列宽时使用的模式
             DataG.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+
         }
         //实现复选框单选功能
         private void DataG_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -140,106 +143,8 @@ namespace test
         #region 提交投票
         private void button4_Click(object sender, EventArgs e)
         {
-            List<string> listcell6 = new List<string>();//同意
-            List<string> listcell7 = new List<string>();//反对
-            List<string> listcell8 = new List<string>();//弃权
-            int count = DataG.RowCount;
-            bool isallcheck = true;
-            for (int i = 0; i < count; i++)
-            {
-                bool cell6 = Convert.ToBoolean(DataG.Rows[i].Cells[6].Value);
-                bool cell7 = Convert.ToBoolean(DataG.Rows[i].Cells[7].Value);
-                bool cell8 = Convert.ToBoolean(DataG.Rows[i].Cells[8].Value);
-                if (!cell6 && !cell7 && !cell8)
-                {
-                    isallcheck = false;
-                    break;
-                }
-                else
-                {
-                    continue;
-                }
-            }
-            if (isallcheck)
-            {
-                string where6 = " ";
-                string where7 = " ";
-                string where8 = " ";
-                for (int i = 0; i < count; i++)
-                {
-                    bool cell6 = Convert.ToBoolean(DataG.Rows[i].Cells[6].Value);
-                    bool cell7 = Convert.ToBoolean(DataG.Rows[i].Cells[7].Value);
-                    bool cell8 = Convert.ToBoolean(DataG.Rows[i].Cells[8].Value);
-                    if (cell6)
-                    {
-                        listcell6.Add(DataG.Rows[i].Cells[1].Value.ToString());
-                        continue;
-                    }
-                    else if (cell7)
-                    {
-                        listcell7.Add(DataG.Rows[i].Cells[1].Value.ToString());
-                        continue;
-                    }
-                    else if (cell8)
-                    {
-                        listcell8.Add(DataG.Rows[i].Cells[1].Value.ToString());
-                        continue;
-                    }
-                    else
-                    {
-                        MessageBox.Show("提交失败", "提交结果", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        break;
-                    }
-                }
-
-                if(listcell6.Count != 0)
-                {
-                    where6 = listcell6[0];
-                    for (int x = 1; x < listcell6.Count; x++)
-                    {
-                        where6 = listcell6[x] + "," + where6;
-                    }
-                    string update6 = "update 中学人员信息表 set 评委会同意人数 +=1 where 身份证号码 in(" + where6 +")";
-                    db.Submitvoteinfor(update6);
-                }
-                
-                if (listcell7.Count != 0)
-                {
-                    where7 = listcell7[0];
-                    for (int y = 1; y < listcell7.Count; y++)
-                    {
-                        where7 = listcell7[y] + "," + where7;
-                    }
-                    string update7 = "update 中学人员信息表 set 评委会不同意人数 +=1 where 身份证号码 in(" + where7 + ")";
-                    db.Submitvoteinfor(update7);
-                }
-                
-                if(listcell8.Count != 0)
-                {
-                    where8 = listcell8[0];
-                    for (int z = 1; z < listcell8.Count; z++)
-                    {
-                        where8 = listcell8[z] + "," + where8;
-                    }
-                    string update8 = "update 中学人员信息表 set 评委会弃权人数 +=1 where 身份证号码 in(" + where8 + ")";
-                    db.Submitvoteinfor(update8);
-                }
-
-                //更新用户状态
-                db.Updatestatus(invcode);
-
-                MessageBox.Show("你已成功提交投票", "提交结果", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                // 实例化子窗体
-                WaittingWindow waittingwindow = new WaittingWindow(pici,turn,invcode);
-                this.Hide();
-                //弹出模式对话框（子窗体）
-                waittingwindow.ShowDialog();
-                Application.ExitThread();
-            }
-            else
-            {
-                MessageBox.Show("你有未完成的投票，请完成投票");
-            }
+            BGW1.RunWorkerAsync();
+            openwindow();
         }
         #endregion
 
@@ -327,5 +232,150 @@ namespace test
         }
         #endregion
 
+        //打开loading窗口
+        public void openwindow()
+        {
+            try
+            {
+                Loading loading = new Loading();
+                loading.ShowDialog();
+            }
+            catch
+            {
+                MessageBox.Show("Error");
+            }
+        }
+
+        #region 提交按钮backgroundWork
+        private void BGW1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            List<string> listcell6 = new List<string>();//同意
+            List<string> listcell7 = new List<string>();//反对
+            List<string> listcell8 = new List<string>();//弃权
+            int count = DataG.RowCount;
+            bool isallcheck = true;
+            for (int i = 0; i < count; i++)
+            {
+                if (!Convert.ToBoolean(DataG.Rows[i].Cells[6].Value)
+                    && !Convert.ToBoolean(DataG.Rows[i].Cells[7].Value)
+                    && !Convert.ToBoolean(DataG.Rows[i].Cells[8].Value)
+                    )
+                {
+                    isallcheck = false;
+                    break;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            if (isallcheck)
+            {
+                string where6 = " ";
+                string where7 = " ";
+                string where8 = " ";
+                for (int i = 0; i < count; i++)
+                {
+                    if (Convert.ToBoolean(DataG.Rows[i].Cells[6].Value))
+                    {
+                        listcell6.Add(DataG.Rows[i].Cells[1].Value.ToString());
+                        continue;
+                    }
+                    else if (Convert.ToBoolean(DataG.Rows[i].Cells[7].Value))
+                    {
+                        listcell7.Add(DataG.Rows[i].Cells[1].Value.ToString());
+                        continue;
+                    }
+                    else if (Convert.ToBoolean(DataG.Rows[i].Cells[8].Value))
+                    {
+                        listcell8.Add(DataG.Rows[i].Cells[1].Value.ToString());
+                        continue;
+                    }
+                    else
+                    {
+                        MessageBox.Show("提交失败", "提交结果", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    }
+                }
+
+                if (listcell6.Count != 0)
+                {
+                    where6 = listcell6[0];
+                    for (int x = 1; x < listcell6.Count; x++)
+                    {
+                        where6 = listcell6[x] + "," + where6;
+                    }
+                    string update6 = "update 中学人员信息表 set 评委会同意人数 +=1 where 身份证号码 in(" + where6 + ")";
+                    db.Submitvoteinfor(update6);
+                }
+
+                if (listcell7.Count != 0)
+                {
+                    where7 = listcell7[0];
+                    for (int y = 1; y < listcell7.Count; y++)
+                    {
+                        where7 = listcell7[y] + "," + where7;
+                    }
+                    string update7 = "update 中学人员信息表 set 评委会不同意人数 +=1 where 身份证号码 in(" + where7 + ")";
+                    db.Submitvoteinfor(update7);
+                }
+
+                if (listcell8.Count != 0)
+                {
+                    where8 = listcell8[0];
+                    for (int z = 1; z < listcell8.Count; z++)
+                    {
+                        where8 = listcell8[z] + "," + where8;
+                    }
+                    string update8 = "update 中学人员信息表 set 评委会弃权人数 +=1 where 身份证号码 in(" + where8 + ")";
+                    db.Submitvoteinfor(update8);
+                }
+
+                //更新用户状态
+                db.Updatestatus(invcode);
+                MessageBox.Show("你已成功提交投票", "提交结果", MessageBoxButtons.OK, MessageBoxIcon.Information);
+               
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void BGW1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Control.CheckForIllegalCrossThreadCalls = false;
+            Application.OpenForms["loading"].Close();
+            if (e.Cancelled)
+            {
+                MessageBox.Show("你有未完成的投票，请完成投票");
+            }
+            else
+            {
+                // 实例化子窗体
+                WaittingWindow waittingwindow = new WaittingWindow(pici, turn, invcode);
+                this.Hide();
+                //弹出模式对话框（子窗体）
+                waittingwindow.ShowDialog();
+                Application.ExitThread();
+            }
+            
+        }
+        #endregion
+
+        #region 加载数据backgroundWork
+        private void BGW2_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Control.CheckForIllegalCrossThreadCalls = false;
+            dt = db.Loadvoteinfor(pici).Tables[0];
+        }
+
+        private void BGW2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Control.CheckForIllegalCrossThreadCalls = false;
+            Application.OpenForms["loading"].Close();
+            DataG.DataSource = dt;
+        }
+#endregion
     }
 }
