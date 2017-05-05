@@ -339,8 +339,6 @@ namespace test
             }
             else
             {
-                Control.CheckForIllegalCrossThreadCalls = false;
-                Application.OpenForms["loading"].Close();
                 e.Cancel = true;
             }
         }
@@ -349,6 +347,8 @@ namespace test
         {
             if (e.Cancelled)
             {
+                Control.CheckForIllegalCrossThreadCalls = false;
+                Application.OpenForms["loading"].Close();
                 MessageBox.Show("你有未完成的投票，请完成投票");
             }
             else
