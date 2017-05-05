@@ -36,16 +36,50 @@ namespace test
             conn += ";pwd=";
             conn += pw;
             DataBase.ConnStr = conn;
+            conBgw.RunWorkerAsync();
+            openwindow();
+        }
+
+        //打开loading窗口
+        public void openwindow()
+        {
+            try
+            {
+                Loading loading = new Loading();
+                loading.ShowDialog();
+            }
+            catch
+            {
+                MessageBox.Show("Error");
+            }
+        }
+
+        private void conBgw_DoWork(object sender, DoWorkEventArgs e)
+        {
             if (sql.Link())
+            {
+                e.Cancel = false;
+            }
+            else
+            {
+                e.Cancel = true;
+                
+            }
+        }
+
+        private void conBgw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Control.CheckForIllegalCrossThreadCalls = false;
+            Application.OpenForms["loading"].Close();
+            if (e.Cancelled)
+            {
+                MessageBox.Show("连接数据库失败！");
+            }else
             {
                 LoginForm vote = new LoginForm();
                 this.Hide();
                 vote.ShowDialog();
                 Application.ExitThread();
-            }
-            else
-            {
-                MessageBox.Show("连接数据库失败！");
             }
         }
     }

@@ -37,6 +37,7 @@
             this.userid = new System.Windows.Forms.TextBox();
             this.password = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.conBgw = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // label1
@@ -126,6 +127,11 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // conBgw
+            // 
+            this.conBgw.DoWork += new System.ComponentModel.DoWorkEventHandler(this.conBgw_DoWork);
+            this.conBgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.conBgw_RunWorkerCompleted);
+            // 
             // ConnectionWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -159,5 +165,6 @@
         private System.Windows.Forms.TextBox userid;
         private System.Windows.Forms.TextBox password;
         private System.Windows.Forms.Button button1;
+        private System.ComponentModel.BackgroundWorker conBgw;
     }
 }
