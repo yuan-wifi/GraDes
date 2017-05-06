@@ -300,21 +300,24 @@ namespace test
 
                 if (listcell6.Count != 0)
                 {
-                    where6 = listcell6[0];
+                    where6 = "'" + listcell6[0] + "'";
                     for (int x = 1; x < listcell6.Count; x++)
                     {
-                        where6 = listcell6[x] + "," + where6;
+                        where6 = "'" + listcell6[x] + " '"+ "," + where6;
                     }
                     string update6 = "update 中学人员信息表 set 评委会同意人数 +=1 where 身份证号码 in(" + where6 + ")";
+                    //string msg =  db.Submitvoteinfor(update6);
+                    //MessageBox.Show(msg);
                     db.Submitvoteinfor(update6);
+                    
                 }
 
                 if (listcell7.Count != 0)
                 {
-                    where7 = listcell7[0];
+                    where7 = "'" + listcell7[0] + "'";
                     for (int y = 1; y < listcell7.Count; y++)
                     {
-                        where7 = listcell7[y] + "," + where7;
+                        where7 = "'" + listcell7[y] + " '" + "," + where7;
                     }
                     string update7 = "update 中学人员信息表 set 评委会不同意人数 +=1 where 身份证号码 in(" + where7 + ")";
                     db.Submitvoteinfor(update7);
@@ -322,10 +325,10 @@ namespace test
 
                 if (listcell8.Count != 0)
                 {
-                    where8 = listcell8[0];
+                    where8 = "'" + listcell8[0] + "'";
                     for (int z = 1; z < listcell8.Count; z++)
                     {
-                        where8 = listcell8[z] + "," + where8;
+                        where8 = "'" + listcell8[z] + " '" + "," + where8;
                     }
                     string update8 = "update 中学人员信息表 set 评委会弃权人数 +=1 where 身份证号码 in(" + where8 + ")";
                     db.Submitvoteinfor(update8);

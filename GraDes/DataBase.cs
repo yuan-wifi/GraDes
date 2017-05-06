@@ -149,14 +149,14 @@ namespace test
             }
             catch
             {
-                msg = "修改失败！";
+                msg = "提交数据失败！";
                 return msg;
             }
             finally
             {
                 Conn.Close();
             }
-            return msg;
+            return msg = "";
         }
         //查询其余用户是否完成投票 
         public int Selectissubmit()
