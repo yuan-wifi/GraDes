@@ -67,6 +67,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "WaittingWindow";
             this.Opacity = 0.8D;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "四川省教育厅全省中小学高级职称高评委网络投票系统";
             this.TransparencyKey = System.Drawing.Color.Transparent;
