@@ -28,46 +28,48 @@ namespace test
         DataBase db = new DataBase();
         DataTable dt = new DataTable();
 
+
+
         #region 窗体载入
         private void VoteWindow_Load(object sender, EventArgs e)
         {
             BGW2.RunWorkerAsync();
             openwindow();
             //设置DataGridView控件外观
-            DataG.Columns[0].HeaderText = "姓名";
-            DataG.Columns[1].HeaderText = "身份证号";
-            DataG.Columns[2].HeaderText = "地市州";
-            DataG.Columns[3].HeaderText = "所在单位";
-            DataG.Columns[4].HeaderText = "拟评审专业技术职务";
-            DataG.Columns[5].HeaderText = "学科组";
+            dataGridView1.Columns[0].HeaderText = "姓名";
+            dataGridView1.Columns[1].HeaderText = "身份证号";
+            dataGridView1.Columns[2].HeaderText = "地市州";
+            dataGridView1.Columns[3].HeaderText = "所在单位";
+            dataGridView1.Columns[4].HeaderText = "拟评审专业技术职务";
+            dataGridView1.Columns[5].HeaderText = "学科组";
             //添加同意CheckBox
             DataGridViewCheckBoxColumn agreeCheckBox = new DataGridViewCheckBoxColumn();
             agreeCheckBox.Name = "agree";
             agreeCheckBox.HeaderText = "赞成";
-            this.DataG.Columns.Insert(6, agreeCheckBox);
+            this.dataGridView1.Columns.Insert(6, agreeCheckBox);
             //添加不同意CheckBox
             DataGridViewCheckBoxColumn disagreeCheckBox = new DataGridViewCheckBoxColumn();
             disagreeCheckBox.Name = "disagree";
             disagreeCheckBox.HeaderText = "反对";
-            this.DataG.Columns.Insert(7, disagreeCheckBox);
+            this.dataGridView1.Columns.Insert(7, disagreeCheckBox);
             //添加弃权CheckBox
             DataGridViewCheckBoxColumn giveupCheckBox = new DataGridViewCheckBoxColumn();
             giveupCheckBox.Name = "giveup";
             giveupCheckBox.HeaderText = "放弃";
-            this.DataG.Columns.Insert(8, giveupCheckBox);
+            this.dataGridView1.Columns.Insert(8, giveupCheckBox);
             //不允许自增行
-            DataG.AllowUserToAddRows = false;
-            DataG.CellClick += DataG_CellClick;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.CellClick += DataG_CellClick;
             //表头不换行
-            DataG.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
+            dataGridView1.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
             //循环前6列禁止点击
             for (int i = 0; i < 6; i++)
             {
-                this.DataG.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
-                DataG.Columns[i].ReadOnly = true;
+                this.dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView1.Columns[i].ReadOnly = true;
             }
             //设置DataGridView控件在自动调整列宽时使用的模式
-            DataG.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
 
         }
         //实现复选框单选功能
@@ -78,10 +80,10 @@ namespace test
             int col = e.ColumnIndex;
             if (col >= 6)
             {
-                DataG.Rows[row].Cells[6].Value = false;
-                DataG.Rows[row].Cells[7].Value = false;
-                DataG.Rows[row].Cells[8].Value = false;
-                DataG.Rows[row].Cells[col].Value = true;
+                dataGridView1.Rows[row].Cells[6].Value = false;
+                dataGridView1.Rows[row].Cells[7].Value = false;
+                dataGridView1.Rows[row].Cells[8].Value = false;
+                dataGridView1.Rows[row].Cells[col].Value = true;
             }
 
         }
@@ -91,12 +93,12 @@ namespace test
         #region 全部赞成
         private void button6_Click(object sender, EventArgs e)
         {
-            int count = DataG.RowCount;
+            int count = dataGridView1.RowCount;
             for (int i = 0; i < count; i++)
             {
-                DataG.Rows[i].Cells[6].Value = true;
-                DataG.Rows[i].Cells[7].Value = false;
-                DataG.Rows[i].Cells[8].Value = false;
+                dataGridView1.Rows[i].Cells[6].Value = true;
+                dataGridView1.Rows[i].Cells[7].Value = false;
+                dataGridView1.Rows[i].Cells[8].Value = false;
             }
         }
         #endregion
@@ -104,12 +106,12 @@ namespace test
         #region 全部反对
         private void button1_Click(object sender, EventArgs e)
         {
-            int count = DataG.RowCount;
+            int count = dataGridView1.RowCount;
             for (int i = 0; i < count; i++)
             {
-                DataG.Rows[i].Cells[6].Value = false;
-                DataG.Rows[i].Cells[7].Value = true;
-                DataG.Rows[i].Cells[8].Value = false;
+                dataGridView1.Rows[i].Cells[6].Value = false;
+                dataGridView1.Rows[i].Cells[7].Value = true;
+                dataGridView1.Rows[i].Cells[8].Value = false;
             }
         }
         #endregion
@@ -117,12 +119,12 @@ namespace test
         #region 全部放弃
         private void button3_Click(object sender, EventArgs e)
         {
-            int count = DataG.RowCount;
+            int count = dataGridView1.RowCount;
             for (int i = 0; i < count; i++)
             {
-                DataG.Rows[i].Cells[6].Value = false;
-                DataG.Rows[i].Cells[7].Value = false;
-                DataG.Rows[i].Cells[8].Value = true;
+                dataGridView1.Rows[i].Cells[6].Value = false;
+                dataGridView1.Rows[i].Cells[7].Value = false;
+                dataGridView1.Rows[i].Cells[8].Value = true;
             }
         }
         #endregion
@@ -130,12 +132,12 @@ namespace test
         #region 全部重选
         private void button2_Click(object sender, EventArgs e)
         {
-            int count = DataG.RowCount;
+            int count = dataGridView1.RowCount;
             for (int i = 0; i < count; i++)
             {
-                DataG.Rows[i].Cells[6].Value = false;
-                DataG.Rows[i].Cells[7].Value = false;
-                DataG.Rows[i].Cells[8].Value = false;
+                dataGridView1.Rows[i].Cells[6].Value = false;
+                dataGridView1.Rows[i].Cells[7].Value = false;
+                dataGridView1.Rows[i].Cells[8].Value = false;
             }
         }
         #endregion
@@ -163,8 +165,8 @@ namespace test
         private void button7_Click(object sender, EventArgs e)
         {
 
-            int row = DataG.Rows.Count;//得到总行数
-            int cell = DataG.Rows[1].Cells.Count;//得到总列数
+            int row = dataGridView1.Rows.Count;//得到总行数
+            int cell = dataGridView1.Rows[1].Cells.Count;//得到总列数
             int _length = this.textBox1.Text.Trim().Length;
             if (_length > 0)
             {
@@ -173,13 +175,13 @@ namespace test
                     for (int j = 0; j < cell; j++)//得到总列数并在之内循环
                     {
                         //精确查找
-                        if (DataG.Rows[i].Cells[j].Value != null)
+                        if (dataGridView1.Rows[i].Cells[j].Value != null)
                         {
                             //对比TexBox中的值是否与dataGridView中的值相同
-                            if (this.textBox1.Text.Trim() == DataG.Rows[i].Cells[j].Value.ToString().Trim())
+                            if (this.textBox1.Text.Trim() == dataGridView1.Rows[i].Cells[j].Value.ToString().Trim())
                             {
-                                DataG.CurrentCell = DataG[j, i];//定位到相同的单元格
-                                DataG.Rows[i].Selected = true;//定位到行
+                                dataGridView1.CurrentCell = dataGridView1[j, i];//定位到相同的单元格
+                                dataGridView1.Rows[i].Selected = true;//定位到行
                                 SetGetRow = i + 1; return;//返回
                             }
                             //模糊查找定位（连续长度相同才认为是相似）
@@ -190,18 +192,18 @@ namespace test
                               相同则定位到此行 */
                         }
                         //模糊查找
-                        if (DataG.Rows[i].Cells[j].Value != null)
+                        if (dataGridView1.Rows[i].Cells[j].Value != null)
                         {
-                            for (int k = 0; k < DataG.Rows[i].Cells[j].Value.ToString().Trim().Length; k++)
+                            for (int k = 0; k < dataGridView1.Rows[i].Cells[j].Value.ToString().Trim().Length; k++)
                             {
-                                if (_length <= DataG.Rows[i].Cells[j].Value.ToString().Trim().Length - k)//判断要查找内容的长度是否小于对比的内容的长度
+                                if (_length <= dataGridView1.Rows[i].Cells[j].Value.ToString().Trim().Length - k)//判断要查找内容的长度是否小于对比的内容的长度
                                 {
-                                    if (this.textBox1.Text.Trim().Substring(0, 1) == DataG.Rows[i].Cells[j].Value.ToString().Trim().Substring(k, 1))//判断第一个字符是否与要对比的内容的第一个字符相同
+                                    if (this.textBox1.Text.Trim().Substring(0, 1) == dataGridView1.Rows[i].Cells[j].Value.ToString().Trim().Substring(k, 1))//判断第一个字符是否与要对比的内容的第一个字符相同
                                     {
-                                        if (this.textBox1.Text.Trim() == DataG.Rows[i].Cells[j].Value.ToString().Trim().Substring(k, _length))//判断是查找内容与对比内容否相等
+                                        if (this.textBox1.Text.Trim() == dataGridView1.Rows[i].Cells[j].Value.ToString().Trim().Substring(k, _length))//判断是查找内容与对比内容否相等
                                         {
-                                            DataG.CurrentCell = DataG[j, i];//定位到相同的单元格
-                                            DataG.Rows[i].Selected = true;//定位到行
+                                            dataGridView1.CurrentCell = dataGridView1[j, i];//定位到相同的单元格
+                                            dataGridView1.Rows[i].Selected = true;//定位到行
                                             SetGetRow = i + 1; return;//返回
                                         }
                                     }
@@ -220,11 +222,14 @@ namespace test
 
         }
         #endregion
-
+        
         #region 双击单元格
-        private void DataG_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            string idcard = DataG.Rows[e.RowIndex].Cells[1].Value.ToString();
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)   //双击标题不出错
+                return;
+
+            string idcard = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
             //实例化子窗体
             ViewInforWindow viewinfor = new ViewInforWindow(idcard);
             //弹出模式对话框（子窗体）
@@ -252,13 +257,13 @@ namespace test
             List<string> listcell6 = new List<string>();//同意
             List<string> listcell7 = new List<string>();//反对
             List<string> listcell8 = new List<string>();//弃权
-            int count = DataG.RowCount;
+            int count = dataGridView1.RowCount;
             bool isallcheck = true;
             for (int i = 0; i < count; i++)
             {
-                if (!Convert.ToBoolean(DataG.Rows[i].Cells[6].Value)
-                    && !Convert.ToBoolean(DataG.Rows[i].Cells[7].Value)
-                    && !Convert.ToBoolean(DataG.Rows[i].Cells[8].Value)
+                if (!Convert.ToBoolean(dataGridView1.Rows[i].Cells[6].Value)
+                    && !Convert.ToBoolean(dataGridView1.Rows[i].Cells[7].Value)
+                    && !Convert.ToBoolean(dataGridView1.Rows[i].Cells[8].Value)
                     )
                 {
                     isallcheck = false;
@@ -276,19 +281,19 @@ namespace test
                 string where8 = " ";
                 for (int i = 0; i < count; i++)
                 {
-                    if (Convert.ToBoolean(DataG.Rows[i].Cells[6].Value))
+                    if (Convert.ToBoolean(dataGridView1.Rows[i].Cells[6].Value))
                     {
-                        listcell6.Add(DataG.Rows[i].Cells[1].Value.ToString());
+                        listcell6.Add(dataGridView1.Rows[i].Cells[1].Value.ToString());
                         continue;
                     }
-                    else if (Convert.ToBoolean(DataG.Rows[i].Cells[7].Value))
+                    else if (Convert.ToBoolean(dataGridView1.Rows[i].Cells[7].Value))
                     {
-                        listcell7.Add(DataG.Rows[i].Cells[1].Value.ToString());
+                        listcell7.Add(dataGridView1.Rows[i].Cells[1].Value.ToString());
                         continue;
                     }
-                    else if (Convert.ToBoolean(DataG.Rows[i].Cells[8].Value))
+                    else if (Convert.ToBoolean(dataGridView1.Rows[i].Cells[8].Value))
                     {
-                        listcell8.Add(DataG.Rows[i].Cells[1].Value.ToString());
+                        listcell8.Add(dataGridView1.Rows[i].Cells[1].Value.ToString());
                         continue;
                     }
                     else
@@ -303,13 +308,13 @@ namespace test
                     where6 = "'" + listcell6[0] + "'";
                     for (int x = 1; x < listcell6.Count; x++)
                     {
-                        where6 = "'" + listcell6[x] + " '"+ "," + where6;
+                        where6 = "'" + listcell6[x] + " '" + "," + where6;
                     }
                     string update6 = "update 中学人员信息表 set 评委会同意人数 +=1 where 身份证号码 in(" + where6 + ")";
                     //string msg =  db.Submitvoteinfor(update6);
                     //MessageBox.Show(msg);
                     db.Submitvoteinfor(update6);
-                    
+
                 }
 
                 if (listcell7.Count != 0)
@@ -363,7 +368,7 @@ namespace test
                 waittingwindow.ShowDialog();
                 Application.ExitThread();
             }
-            
+
         }
         #endregion
 
@@ -378,8 +383,9 @@ namespace test
         {
             Control.CheckForIllegalCrossThreadCalls = false;
             Application.OpenForms["loading"].Close();
-            DataG.DataSource = dt;
+            dataGridView1.DataSource = dt;
         }
-#endregion
+        #endregion
+
     }
 }

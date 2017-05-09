@@ -50,11 +50,9 @@ namespace test
                         Application.ExitThread();
                         break;
                     }
-                    
                 }
                 else
                 {
-
                     Thread.Sleep(3000);
                 }
             }

@@ -47,7 +47,7 @@
             // Invitecode
             // 
             this.Invitecode.Font = new System.Drawing.Font("宋体", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Invitecode.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
+            this.Invitecode.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.Invitecode.Location = new System.Drawing.Point(204, 186);
             this.Invitecode.MaxLength = 6;
             this.Invitecode.Name = "Invitecode";
