@@ -35,21 +35,29 @@ namespace test
                 int nosubmit = db.Selectissubmit();
                 if (nosubmit == 0)
                 {
-                    if((pici+1) > (int)turn)
+                    if(PrintExcel.SaveResultToExcel())//保存数据到Excel
                     {
-                        this.Hide();
-                        MessageBox.Show("非常感谢！本次投票已经全部结束！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        System.Environment.Exit(0);
+                        if ((pici + 1) > (int)turn)
+                        {
+                            this.Hide();
+                            MessageBox.Show("非常感谢！本次投票已经全部结束！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            System.Environment.Exit(0);
+                            break;
+                        }
+                        else
+                        {
+                            VoteWindow vote = new VoteWindow(pici + 1, db.Selectturn(), invcode);
+                            this.Hide();
+                            vote.ShowDialog();
+                            Application.ExitThread();
+                            break;
+                        }
+                    }else
+                    {
+                        MessageBox.Show("数据保存到Excel出错！");
                         break;
                     }
-                    else
-                    {
-                        VoteWindow vote = new VoteWindow(pici + 1, db.Selectturn(), invcode);
-                        this.Hide();
-                        vote.ShowDialog();
-                        Application.ExitThread();
-                        break;
-                    }
+                    
                 }
                 else
                 {
