@@ -16,13 +16,15 @@ namespace test
         public static bool SaveResultToExcel()
         {
             try
-            { //HSSF可以读取xls格式的Excel文件
+            { 
+                //HSSF可以读取xls格式的Excel文件
                 IWorkbook workbook = new HSSFWorkbook();
                 //XSSF可以读取xlsx格式的Excel文件
                 //IWorkbook workbook = new XSSFWorkbook();
-
+                //创建文件保存路径
+                string fileSavePath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\中学正常晋升(第轮).xls";
                 //Excel文件至少要有一个工作表sheet
-                ISheet sheet = workbook.CreateSheet("工作表");
+                ISheet sheet = workbook.CreateSheet("投票结果");
                 //创建行
                 for (int i = 0; i < 10; i++)
                 {
@@ -36,10 +38,10 @@ namespace test
                 }
                 //表格制作完成后，保存
                 //创建一个文件流对象
-                using (FileStream fs = File.Open((Environment.SpecialFolder.DesktopDirectory) + "test.xls", FileMode.OpenOrCreate))
+                using (FileStream fs = File.OpenWrite(fileSavePath))
                 {
                     workbook.Write(fs);
-                    //最后记得关闭对象
+                    //关闭对象
                     workbook.Close();
                 }
                 return true;
