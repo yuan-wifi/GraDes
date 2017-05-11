@@ -5,7 +5,7 @@ delete from 中学人员信息表
 declare @i int
 declare @name nvarchar(16)
 declare @num nvarchar(18)
-set @i = 10;
+set @i = 1;
 
 while (@i<100)
 begin

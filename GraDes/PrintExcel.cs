@@ -27,15 +27,29 @@ namespace test
                 string fileSavePath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\投票结果(第"+pici+"轮).xls";
                 //Excel文件至少要有一个工作表sheet
                 ISheet sheet = workbook.CreateSheet("投票结果");
+                //设置表头
+                sheet.CreateRow(0);
+                sheet.GetRow(0).CreateCell(0).SetCellValue("姓名");
+                sheet.GetRow(0).CreateCell(1).SetCellValue("身份证号码");
+                sheet.GetRow(0).CreateCell(2).SetCellValue("地市州");
+                sheet.GetRow(0).CreateCell(3).SetCellValue("单位名称");
+                sheet.GetRow(0).CreateCell(4).SetCellValue("拟评审专业技术职务");
+                sheet.GetRow(0).CreateCell(5).SetCellValue("评委会名称");
+                sheet.GetRow(0).CreateCell(6).SetCellValue("评委会总人数");
+                sheet.GetRow(0).CreateCell(7).SetCellValue("评委会参加投票人数");
+                sheet.GetRow(0).CreateCell(8).SetCellValue("评委会同意人数");
+                sheet.GetRow(0).CreateCell(9).SetCellValue("评委会不同意人数");
+                sheet.GetRow(0).CreateCell(10).SetCellValue("评委会弃权人数");
+                sheet.GetRow(0).CreateCell(11).SetCellValue("评委会表决结果");
                 //创建行
-                for (int i = 0; i < 10; i++)
+                for (int i = 1; i < dt.Rows.Count; i++)
                 {
-                    IRow row = sheet.CreateRow(i); //i表示了创建行的索引，从0开始
+                    IRow row = sheet.CreateRow(i); //i表示创建行的索引，从0开始
                                                    //创建单元格
-                    for (int j = 0; j < 5; j++)
+                    for (int j = 0; j < dt.Columns.Count; j++)
                     {
                         ICell cell = row.CreateCell(j);  //同时这个函数还有第二个重载，可以指定单元格存放数据的类型
-                        cell.SetCellValue(i.ToString() + j.ToString());
+                        cell.SetCellValue(dt.Rows[i][j].ToString());
                     }
                 }
 
