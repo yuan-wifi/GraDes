@@ -177,5 +177,54 @@ namespace test
             }
             return msg;
         }
+        //更新参与投票人数和投票总人数
+        public bool updatevotecount(int turn)
+        {
+            bool msg = false;
+            string updatesql = @"update 中学人员信息表 set 
+                                 评委会总人数 = (select count(*) from users_infor),
+                                 评委会参加投票人数 = (select count(*) from users_infor where users_act = 2), 
+                                 评委会表决结果 = case when 评委会参加投票人数/ 2 < 评委会同意人数 then '通过'
+                                 else '未通过'
+                                 end where 轮次=" + turn + ";";
+            DataSet ds = new DataSet();
+            SqlDataAdapter da = new SqlDataAdapter();
+            try
+            {
+                Conn.ConnectionString = ConnStr;
+                da.SelectCommand = new SqlCommand(updatesql, Conn);
+                da.Fill(ds);
+            }
+            catch
+            {
+                return msg;
+            }
+            finally
+            {
+                Conn.Close();
+            }
+            return msg = true;
+        }
+        //查询投票结果
+        public DataSet selectresult(int turn)
+        {
+            string sel = @"select 姓名,身份证号码,单位所在区域,单位名称,拟评审专业技术职务,
+                           评委会名称,评委会总人数,评委会参加投票人数,评委会同意人数,评委会不同意人数,
+                           评委会弃权人数,评委会表决结果 
+                           from 中学人员信息表 where 轮次=" + turn + " order by 身份证号码 ";
+            DataSet ds = new DataSet();
+            SqlDataAdapter da = new SqlDataAdapter();
+            try
+            {
+                Conn.ConnectionString = ConnStr;
+                da.SelectCommand = new SqlCommand(sel, Conn);
+                da.Fill(ds);
+            }
+            finally
+            {
+                Conn.Close();
+            }
+            return ds;
+        }
     }
 }

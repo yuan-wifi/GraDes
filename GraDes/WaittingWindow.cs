@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Data;
 using System.Threading;
 using System.Windows.Forms;
 namespace test
 {
     public partial class WaittingWindow : Form
     {
-        
+
         DataBase db = new DataBase();
+        DataTable dt = new DataTable();
         private int pici;
         private object turn;
         private int invcode;
@@ -35,29 +37,38 @@ namespace test
                 int nosubmit = db.Selectissubmit();
                 if (nosubmit == 0)
                 {
-                    if(PrintExcel.SaveResultToExcel())//保存数据到Excel
+                    if (db.updatevotecount(pici))
                     {
-                        if ((pici + 1) > (int)turn)
+                        dt = db.selectresult(pici).Tables[0];
+                        if (PrintExcel.SaveResultToExcel(pici,dt))//保存数据到Excel
                         {
-                            this.Hide();
-                            MessageBox.Show("非常感谢！本次投票已经全部结束！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            System.Environment.Exit(0);
-                            break;
+                            if ((pici + 1) > (int)turn)
+                            {
+                                this.Hide();
+                                MessageBox.Show("非常感谢！本次投票已经全部结束！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                System.Environment.Exit(0);
+                                break;
+                            }
+                            else
+                            {
+                                VoteWindow vote = new VoteWindow(pici + 1, db.Selectturn(), invcode);
+                                this.Hide();
+                                vote.ShowDialog();
+                                Application.ExitThread();
+                                break;
+                            }
                         }
                         else
                         {
-                            VoteWindow vote = new VoteWindow(pici + 1, db.Selectturn(), invcode);
-                            this.Hide();
-                            vote.ShowDialog();
-                            Application.ExitThread();
+                            MessageBox.Show("数据保存到Excel出错！");
                             break;
                         }
-                    }else
+                    }
+                    else
                     {
-                        MessageBox.Show("数据保存到Excel出错！");
+                        MessageBox.Show("更新投票人员失败！");
                         break;
                     }
-                    
                 }
                 else
                 {

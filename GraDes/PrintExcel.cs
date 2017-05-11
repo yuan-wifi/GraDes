@@ -13,7 +13,9 @@ namespace test
 {
     class PrintExcel
     {
-        public static bool SaveResultToExcel()
+        DataBase db = new DataBase();
+        DataTable dt = new DataTable();
+        public static bool SaveResultToExcel(int pici,DataTable dt)
         {
             try
             { 
@@ -22,7 +24,7 @@ namespace test
                 //XSSF可以读取xlsx格式的Excel文件
                 //IWorkbook workbook = new XSSFWorkbook();
                 //创建文件保存路径
-                string fileSavePath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\中学正常晋升(第轮).xls";
+                string fileSavePath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\投票结果(第"+pici+"轮).xls";
                 //Excel文件至少要有一个工作表sheet
                 ISheet sheet = workbook.CreateSheet("投票结果");
                 //创建行
@@ -36,6 +38,7 @@ namespace test
                         cell.SetCellValue(i.ToString() + j.ToString());
                     }
                 }
+
                 //表格制作完成后，保存
                 //创建一个文件流对象
                 using (FileStream fs = File.OpenWrite(fileSavePath))
