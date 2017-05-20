@@ -58,22 +58,30 @@ namespace test
         {
             if (sql.Link())
             {
-                Control.CheckForIllegalCrossThreadCalls = false;
-                Application.OpenForms["loading"].Close(); //关闭等待窗口
-                e.Cancel = false;
+                if (PrintExcel.SaveCodeToExcel(sql.insertcode().Tables[0]))
+                {
+                    Control.CheckForIllegalCrossThreadCalls = false;
+                    Application.OpenForms["loading"].Close(); //关闭等待窗口
+                    e.Cancel = false;
+                }
+                else
+                {
+                    MessageBox.Show("生成邀请码失败！");
+                }
+
             }
             else
             {
                 Control.CheckForIllegalCrossThreadCalls = false;
                 Application.OpenForms["loading"].Close(); //关闭等待窗口
                 e.Cancel = true;
-                
+
             }
         }
 
         private void conBgw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            
+
             if (e.Cancelled)
             {
                 MessageBox.Show("连接数据库失败！");

@@ -13,11 +13,12 @@ namespace test
 {
     public partial class VoteWindow : Form
     {
-        public VoteWindow(int pici, int turn, int invcode)
+        public VoteWindow(int pici, int turn, int invcode, int level)
         {
             this.pici = pici;
             this.turn = turn;
             this.invcode = invcode;
+            this.level = level;
             InitializeComponent();
         }
 
@@ -25,6 +26,7 @@ namespace test
         private int invcode;
         private int pici;
         private int turn;
+        private int level;
         DataBase db = new DataBase();
         DataTable dt = new DataTable();
 
@@ -33,45 +35,74 @@ namespace test
         #region 窗体载入
         private void VoteWindow_Load(object sender, EventArgs e)
         {
-            BGW2.RunWorkerAsync();
-            openwindow();
-            //设置DataGridView控件外观
-            dataGridView1.Columns[0].HeaderText = "姓名";
-            dataGridView1.Columns[1].HeaderText = "身份证号";
-            dataGridView1.Columns[2].HeaderText = "地市州";
-            dataGridView1.Columns[3].HeaderText = "所在单位";
-            dataGridView1.Columns[4].HeaderText = "拟评审专业技术职务";
-            dataGridView1.Columns[5].HeaderText = "学科组";
-            //添加同意CheckBox
-            DataGridViewCheckBoxColumn agreeCheckBox = new DataGridViewCheckBoxColumn();
-            agreeCheckBox.Name = "agree";
-            agreeCheckBox.HeaderText = "赞成";
-            this.dataGridView1.Columns.Insert(6, agreeCheckBox);
-            //添加不同意CheckBox
-            DataGridViewCheckBoxColumn disagreeCheckBox = new DataGridViewCheckBoxColumn();
-            disagreeCheckBox.Name = "disagree";
-            disagreeCheckBox.HeaderText = "反对";
-            this.dataGridView1.Columns.Insert(7, disagreeCheckBox);
-            //添加弃权CheckBox
-            DataGridViewCheckBoxColumn giveupCheckBox = new DataGridViewCheckBoxColumn();
-            giveupCheckBox.Name = "giveup";
-            giveupCheckBox.HeaderText = "放弃";
-            this.dataGridView1.Columns.Insert(8, giveupCheckBox);
-            //不允许自增行
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.CellClick += DataG_CellClick;
-            //表头不换行
-            dataGridView1.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
-            //循环前6列禁止点击
-            for (int i = 0; i < 6; i++)
+            if (level == 1)
             {
-                this.dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dataGridView1.Columns[i].ReadOnly = true;
-            }
-            //设置DataGridView控件在自动调整列宽时使用的模式
-            dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+                BGW2.RunWorkerAsync();
+                openwindow();
+                //设置DataGridView控件外观
+                dataGridView1.Columns[0].HeaderText = "姓名";
+                dataGridView1.Columns[1].HeaderText = "身份证号";
+                dataGridView1.Columns[2].HeaderText = "地市州";
+                dataGridView1.Columns[3].HeaderText = "所在单位";
+                dataGridView1.Columns[4].HeaderText = "拟评审专业技术职务";
+                dataGridView1.Columns[5].HeaderText = "学科组";
+                //添加同意CheckBox
+                DataGridViewCheckBoxColumn agreeCheckBox = new DataGridViewCheckBoxColumn();
+                agreeCheckBox.Name = "agree";
+                agreeCheckBox.HeaderText = "赞成";
+                this.dataGridView1.Columns.Insert(6, agreeCheckBox);
+                //添加不同意CheckBox
+                DataGridViewCheckBoxColumn disagreeCheckBox = new DataGridViewCheckBoxColumn();
+                disagreeCheckBox.Name = "disagree";
+                disagreeCheckBox.HeaderText = "反对";
+                this.dataGridView1.Columns.Insert(7, disagreeCheckBox);
+                //添加弃权CheckBox
+                DataGridViewCheckBoxColumn giveupCheckBox = new DataGridViewCheckBoxColumn();
+                giveupCheckBox.Name = "giveup";
+                giveupCheckBox.HeaderText = "放弃";
+                this.dataGridView1.Columns.Insert(8, giveupCheckBox);
+                //不允许自增行
+                dataGridView1.AllowUserToAddRows = false;
+                dataGridView1.CellClick += DataG_CellClick;
+                //表头不换行
+                dataGridView1.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
+                //循环前6列禁止点击
+                for (int i = 0; i < 6; i++)
+                {
+                    this.dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                    dataGridView1.Columns[i].ReadOnly = true;
+                }
+                //设置DataGridView控件在自动调整列宽时使用的模式
+                dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
 
+            }
+            else
+            {
+                dt = db.Loaduserinfor().Tables[0];
+                dataGridView1.DataSource = dt;
+                //设置DataGridView控件外观
+                dataGridView1.Columns[0].HeaderText = "邀请码";
+                dataGridView1.Columns[1].HeaderText = "身份等级";
+                dataGridView1.Columns[2].HeaderText = "用户登录状态";
+                dataGridView1.Columns[3].HeaderText = "用户投票状态";
+                //邀请码和等级无法更改
+                dataGridView1.Columns[0].ReadOnly = true;
+                dataGridView1.Columns[1].ReadOnly = true;
+                //登录状态和投票状态可以更改
+                dataGridView1.Columns[2].ReadOnly = false;
+                dataGridView1.Columns[3].ReadOnly = false;
+                dataGridView1.AllowUserToAddRows = false;
+                dataGridView1.AllowUserToDeleteRows = false;
+                //设置DataGridView控件在自动调整列宽时使用的模式
+                dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+                button6.Visible = false;
+                button1.Text = "删除此数据";
+                button2.Text = "更新此数据";
+                button3.Text = "全部删除";
+                button4.Text = "全部更新";
+            }
         }
+
         //实现复选框单选功能
         private void DataG_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -103,50 +134,113 @@ namespace test
         }
         #endregion
 
-        #region 全部反对
+        #region 全部反对/删除单个user(管理员)
         private void button1_Click(object sender, EventArgs e)
         {
-            int count = dataGridView1.RowCount;
-            for (int i = 0; i < count; i++)
+            if (level == 1)
             {
-                dataGridView1.Rows[i].Cells[6].Value = false;
-                dataGridView1.Rows[i].Cells[7].Value = true;
-                dataGridView1.Rows[i].Cells[8].Value = false;
+                int count = dataGridView1.RowCount;
+                for (int i = 0; i < count; i++)
+                {
+                    dataGridView1.Rows[i].Cells[6].Value = false;
+                    dataGridView1.Rows[i].Cells[7].Value = true;
+                    dataGridView1.Rows[i].Cells[8].Value = false;
+                }
             }
+            else
+            {
+                int row = this.dataGridView1.CurrentCell.RowIndex;//获取选中单元格的行号
+                string code = dataGridView1.Rows[row].Cells[0].Value.ToString();//获取选中单元格行号的邀请码
+                MessageBox.Show(db.Deleteauserinfor(int.Parse(code)));
+                dt = db.Loaduserinfor().Tables[0];
+                dataGridView1.DataSource = dt;
+            }
+
         }
         #endregion
 
-        #region 全部放弃
+        #region 全部放弃/删除全部user(管理员)
         private void button3_Click(object sender, EventArgs e)
         {
-            int count = dataGridView1.RowCount;
-            for (int i = 0; i < count; i++)
+            if (level == 1)
             {
-                dataGridView1.Rows[i].Cells[6].Value = false;
-                dataGridView1.Rows[i].Cells[7].Value = false;
-                dataGridView1.Rows[i].Cells[8].Value = true;
+                int count = dataGridView1.RowCount;
+                for (int i = 0; i < count; i++)
+                {
+                    dataGridView1.Rows[i].Cells[6].Value = false;
+                    dataGridView1.Rows[i].Cells[7].Value = false;
+                    dataGridView1.Rows[i].Cells[8].Value = true;
+                }
+            }
+            else
+            {
+                MessageBox.Show(db.Deletealluserinfor());
+                dt = db.Loaduserinfor().Tables[0];
+                dataGridView1.DataSource = dt;
             }
         }
         #endregion
 
-        #region 全部重选
+        #region 全部重选/更新单个user(管理员)
         private void button2_Click(object sender, EventArgs e)
         {
-            int count = dataGridView1.RowCount;
-            for (int i = 0; i < count; i++)
+            if (level == 1)
             {
-                dataGridView1.Rows[i].Cells[6].Value = false;
-                dataGridView1.Rows[i].Cells[7].Value = false;
-                dataGridView1.Rows[i].Cells[8].Value = false;
+                int count = dataGridView1.RowCount;
+                for (int i = 0; i < count; i++)
+                {
+                    dataGridView1.Rows[i].Cells[6].Value = false;
+                    dataGridView1.Rows[i].Cells[7].Value = false;
+                    dataGridView1.Rows[i].Cells[8].Value = false;
+                }
             }
+            else
+            {
+                int row = this.dataGridView1.CurrentCell.RowIndex;//获取选中单元格的行号
+                string code = dataGridView1.Rows[row].Cells[0].Value.ToString();//获取选中单元格行号的邀请码
+                string level = dataGridView1.Rows[row].Cells[1].Value.ToString();//获取选中单元格行号的用户等级
+                string status = dataGridView1.Rows[row].Cells[2].Value.ToString();//获取选中单元格行号的登录状态
+                string active = dataGridView1.Rows[row].Cells[3].Value.ToString();//获取选中单元格行号的投票状态
+                MessageBox.Show(db.Updateauserinfor(int.Parse(code), int.Parse(level), int.Parse(status), int.Parse(active)));
+                dt = db.Loaduserinfor().Tables[0];
+                dataGridView1.DataSource = dt;
+            }
+
         }
         #endregion
 
-        #region 提交投票
+        #region 提交投票/更新全部user(管理员)
         private void button4_Click(object sender, EventArgs e)
         {
-            BGW1.RunWorkerAsync();
-            openwindow();
+            if (level == 1)
+            {
+                BGW1.RunWorkerAsync();
+                openwindow();
+            }
+            else
+            {
+                List<string> listcode = new List<string>();//邀请码
+                List<string> liststatus = new List<string>();//登录状态
+                List<string> listactive = new List<string>();//投票状态
+                string sql = "";
+                for (int i=0; i< dataGridView1.RowCount; i++)
+                {
+                    listcode.Add(dataGridView1.Rows[i].Cells[0].Value.ToString());
+                    liststatus.Add(dataGridView1.Rows[i].Cells[2].Value.ToString());
+                    listactive.Add(dataGridView1.Rows[i].Cells[3].Value.ToString());
+                }
+                
+                for(int j=0 ; j < listcode.Count ; j++)
+                {
+                    //拼update语句
+                    sql = "update users_infor set users_status="+liststatus[j]+",users_act="+listactive[j]+" where users_code = "+listcode[j]+";"+sql;
+                }
+                MessageBox.Show(db.Updatealluserinfor(sql));
+                dt = db.Loaduserinfor().Tables[0];
+                dataGridView1.DataSource = dt;
+
+            }
+
         }
         #endregion
 
@@ -222,18 +316,27 @@ namespace test
 
         }
         #endregion
-        
+
         #region 双击单元格
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex < 0)   //双击标题不出错
-                return;
+            if (level == 1)
+            {
+                if (e.RowIndex < 0 || e.ColumnIndex < 0)   //双击标题不出错
+                    return;
 
-            string idcard = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-            //实例化子窗体
-            ViewInforWindow viewinfor = new ViewInforWindow(idcard);
-            //弹出模式对话框（子窗体）
-            viewinfor.ShowDialog();
+                string idcard = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                //实例化子窗体
+                ViewInforWindow viewinfor = new ViewInforWindow(idcard);
+                //弹出模式对话框（子窗体）
+                viewinfor.ShowDialog();
+            }
+            else
+            {
+                if (e.RowIndex < 0 || e.ColumnIndex < 0)   //双击标题不出错
+                    return;
+            }
+
         }
         #endregion
 
@@ -381,7 +484,7 @@ namespace test
 
         private void BGW2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            Control.CheckForIllegalCrossThreadCalls = false;
+            Control.CheckForIllegalCrossThreadCalls = true;
             Application.OpenForms["loading"].Close();
             dataGridView1.DataSource = dt;
         }

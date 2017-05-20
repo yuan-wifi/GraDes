@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Reflection;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -33,6 +34,29 @@ namespace test
                 throw new Exception(e.Message);
             }
         }
+        //生成邀请码,插入数据,并取出生成的邀请码
+        public DataSet insertcode()
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                Conn.ConnectionString = ConnStr;
+                Conn.Open();
+                SqlCommand comm = new SqlCommand("insertcode", Conn);
+                comm.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter da = new SqlDataAdapter(comm);
+                da.Fill(ds);
+            }
+            catch (Exception msg)
+            {
+                MessageBox.Show(msg.Message);                  
+            }
+            finally
+            {
+                Conn.Close();
+            }
+            return ds;
+        }
         //校验邀请码&用户是否在线
         public bool Checkcode(int code)
         {
@@ -50,7 +74,7 @@ namespace test
                     if (dr["users_status"].ToString() == "0" && (dr["users_act"].ToString()=="0" || dr["users_act"].ToString() == "2"))
                     {
                         Conn.Close();//关闭第一次查询
-                        string upsql = "update users_infor set users_status = 1,users_act = 1 where users_code =" + code;
+                        string upsql = "update users_infor set users_status = 1,users_act = 1 where users_code != 123456 and users_code =" + code;
                         DataSet ds = new DataSet();
                         Conn.ConnectionString = ConnStr;
                         SqlDataAdapter da = new SqlDataAdapter();
@@ -72,6 +96,133 @@ namespace test
             {
                 Conn.Close();
             }
+        }
+        //查询用户等级
+        public int Selectlevel(int code)
+        {
+            int msg;
+            try
+            {
+                string sql = "select users_level from users_infor where users_code= "+code;
+                SqlConnection Conn = new SqlConnection(ConnStr);
+                SqlCommand com = new SqlCommand(sql, Conn);
+                Conn.Open();
+                msg = int.Parse(com.ExecuteScalar().ToString());
+            }
+            finally
+            {
+                Conn.Close();
+            }
+            return msg;
+        }
+        //加载user信息(管理员)
+        public DataSet Loaduserinfor()
+        {
+            string sel = "select * from users_infor where users_code != 123456 ";
+            DataSet ds = new DataSet();
+            SqlDataAdapter da = new SqlDataAdapter();
+            try
+            {
+                Conn.ConnectionString = ConnStr;
+                da.SelectCommand = new SqlCommand(sel, Conn);
+                da.Fill(ds);
+            }
+            finally
+            {
+                Conn.Close();
+            }
+            return ds;
+        }
+        //删除单个user信息(管理员)
+        public string Deleteauserinfor(int code)
+        {
+            string msg;
+            string deletesql = "delete from users_infor where users_code = " + code;
+            DataSet ds = new DataSet();
+            SqlDataAdapter da = new SqlDataAdapter();
+            try
+            {
+                Conn.ConnectionString = ConnStr;
+                da.SelectCommand = new SqlCommand(deletesql, Conn);
+                da.Fill(ds);
+            }
+            catch(Exception error)
+            {
+                return msg = error.ToString();
+            }
+            finally
+            {
+                Conn.Close();
+            }
+            return msg = "成功删除此条数据!";
+        }
+        //删除全部user信息(管理员)
+        public  string Deletealluserinfor()
+        {
+            string msg;
+            string deletesql = "delete from users_infor where users_level =1 ";
+            DataSet ds = new DataSet();
+            SqlDataAdapter da = new SqlDataAdapter();
+            try
+            {
+                Conn.ConnectionString = ConnStr;
+                da.SelectCommand = new SqlCommand(deletesql, Conn);
+                da.Fill(ds);
+            }
+            catch (Exception error)
+            {
+                return msg = error.ToString();
+            }
+            finally
+            {
+                Conn.Close();
+            }
+            return msg = "成功删除!";
+        }
+        //更新单个user信息(管理员)
+        public string Updateauserinfor(int code,int level,int status,int active)
+        {
+            string msg;
+            string deletesql = @"update users_infor set users_status ="+status+",users_act="+active+"where users_code = " + code;
+            DataSet ds = new DataSet();
+            SqlDataAdapter da = new SqlDataAdapter();
+            try
+            {
+                Conn.ConnectionString = ConnStr;
+                da.SelectCommand = new SqlCommand(deletesql, Conn);
+                da.Fill(ds);
+            }
+            catch (Exception error)
+            {
+                return msg = error.ToString();
+            }
+            finally
+            {
+                Conn.Close();
+            }
+            return msg = "成功更新此条数据!";
+        }
+        //更新全部user信息(管理员)
+        public string Updatealluserinfor(string sql)
+        {
+            string msg;
+            DataSet ds = new DataSet();
+            SqlDataAdapter da = new SqlDataAdapter();
+            try
+            {
+                Conn.ConnectionString = ConnStr;
+                da.SelectCommand = new SqlCommand(sql, Conn);
+                da.Fill(ds);
+            }
+            catch (Exception error)
+            {
+                return msg = error.ToString();
+            }
+            finally
+            {
+                Conn.Close();
+            }
+            return msg = "成功更新!";
         }
         //查询总共的批次数批次
         public int Selectturn()

@@ -51,7 +51,7 @@ namespace test
                             }
                             else
                             {
-                                VoteWindow vote = new VoteWindow(pici + 1, db.Selectturn(), invcode);
+                                VoteWindow vote = new VoteWindow(pici + 1, db.Selectturn(), invcode,db.Selectlevel(invcode));
                                 this.Hide();
                                 vote.ShowDialog();
                                 Application.ExitThread();
