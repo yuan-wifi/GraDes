@@ -35,7 +35,6 @@ C:\Users\Sen\Desktop\Gra_Des\GraDes\bin\Debug\NPOI.OOXML.dll
 C:\Users\Sen\Desktop\Gra_Des\GraDes\bin\Debug\NPOI.OpenXml4Net.dll
 C:\Users\Sen\Desktop\Gra_Des\GraDes\bin\Debug\NPOI.OpenXmlFormats.dll
 C:\Users\Sen\Desktop\Gra_Des\GraDes\bin\Debug\NPOI.xml
-C:\Users\Sen\Desktop\Gra_Des\GraDes\obj\Debug\GraDes.csprojResolveAssemblyReference.cache
 C:\Users\Sen\Desktop\Gra_Des\GraDes\obj\Debug\test.ConnectionWindow.resources
 C:\Users\Sen\Desktop\Gra_Des\GraDes\obj\Debug\test.Loading.resources
 C:\Users\Sen\Desktop\Gra_Des\GraDes\obj\Debug\test.LoginForm.resources
