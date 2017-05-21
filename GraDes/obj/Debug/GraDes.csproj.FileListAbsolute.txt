@@ -45,3 +45,9 @@ C:\Users\Sen\Desktop\Gra_Des\GraDes\obj\Debug\test.WaittingWindow.resources
 C:\Users\Sen\Desktop\Gra_Des\GraDes\obj\Debug\GraDes.csproj.GenerateResource.Cache
 C:\Users\Sen\Desktop\Gra_Des\GraDes\obj\Debug\test.exe
 C:\Users\Sen\Desktop\Gra_Des\GraDes\obj\Debug\test.pdb
+C:\Users\Sen\Desktop\GraDes\GraDes\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\Sen\Desktop\GraDes\GraDes\bin\Debug\NPOI.dll
+C:\Users\Sen\Desktop\GraDes\GraDes\bin\Debug\NPOI.OOXML.dll
+C:\Users\Sen\Desktop\GraDes\GraDes\bin\Debug\NPOI.OpenXml4Net.dll
+C:\Users\Sen\Desktop\GraDes\GraDes\bin\Debug\NPOI.OpenXmlFormats.dll
+C:\Users\Sen\Desktop\GraDes\GraDes\bin\Debug\NPOI.xml
