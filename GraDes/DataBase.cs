@@ -333,7 +333,7 @@ namespace test
         {
             bool msg = false;
             string updatesql = @"update 中学人员信息表 set 
-                                 评委会总人数 = (select count(*) from users_infor),
+                                 评委会总人数 = (select count(*) from users_infor where users_level = 1),
                                  评委会参加投票人数 = (select count(*) from users_infor where users_act = 2), 
                                  评委会表决结果 = case when 评委会参加投票人数/ 2 < 评委会同意人数 then '通过'
                                  else '未通过'
